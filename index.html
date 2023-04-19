@@ -9,7 +9,36 @@
     <title>Bate papo UOL</title>
   </head>
   <body>
-
+    <div class="screen" id="screen1">
+      <!-- HTML for Screen 1 -->
+      <h1>Screen 1</h1>
+      <button onclick="showScreen2()">screen 2</button>
+      <button onclick="showScreen3()">screen 3</button>
+    </div>
+    <div class="screen escondido" id="screen2">
+      <!-- HTML for Screen 2 -->
+      <h1>Screen 2</h1>
+      <button onclick="showScreen1()">screen 1</button>
+      <button onclick="showScreen3()">screen 3</button>
+    </div> 
+    <div class="screen escondido" id="screen3">
+      <!-- HTML for Screen 3 -->
+      <h1>Screen 3</h1>
+      <button onclick="showScreen1()">screen 1</button>
+      <button onclick="showScreen2()">screen 2</button>
+      <div class="screen" id="screen31">
+        <button onclick="showScreen32()">screen 3.2</button>
+      </div>
+      <div class="screen escondido" id="screen32">
+        <button onclick="showScreen33()">screen 3.3</button>
+      </div>
+      <div class="screen escondido" id="screen33">
+        <button onclick="showScreen34()">screen 3.4</button>
+      </div>
+      <div class="screen escondido" id="screen34">
+        <button onclick="showScreen1()">screen 1</button>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
   </body>
