@@ -1,14 +1,20 @@
 *{
     box-sizing: border-box;
 }
+
 body{
+    background-color: #FAFAFA;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     margin-top: 70px;
 }
-.escondido{
-    display: none;
+
+.centralizar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .header{
     position: fixed;
     z-index: 4;
@@ -36,4 +42,115 @@ button{
 
     font-size: 18px;
     color: #FFF5F4;
+}
+
+.body1{
+    background-color: #FAFAFA;
+    height: auto;
+    padding-top: 70px;
+    padding-bottom: 211px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.seus-quizzes{
+    width: 1051px;
+    height: 181px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    padding: 30px 400px 33px 400px;
+
+    background-color: #FAFAFA;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+}
+
+.ainda-nao-criou{
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #B9B9B9;
+    text-align: center;
+}
+
+.create-quizz{
+    width: 151px;
+    height: 40px;
+
+    color: #EC362D;
+
+    background-color: #FAFAFA;
+
+    margin-top: 15px;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+}
+
+.todos-os-quizzees{
+    width: 1051px;
+    height: 409px;
+
+    margin-top: 77px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.head-quizz{
+    width: 100%;
+    height: 35px;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.quizz{
+    width: 340px;
+    height: 181px;
+    background-color:aqua;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.quizz-title{
+    margin-top: 120px;
+}
+
+.quizz-bot{
+    margin-top: 12px;
+}
+
+.screen3 h1{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.escondido{
+    display: none;
 }

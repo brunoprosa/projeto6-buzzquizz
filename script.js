@@ -35,3 +35,7 @@ function showScreen1() {
     document.querySelector('#screen33').classList.add('escondido');
     document.querySelector('#screen34').classList.remove('escondido');
   }
+  function expandir(indice){
+    document.querySelector(`.previa-${indice}`).classList.add('escondido');
+    document.querySelector(`.criar-${indice}`).classList.remove('escondido');
+  }
