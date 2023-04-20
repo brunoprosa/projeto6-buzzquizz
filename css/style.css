@@ -29,3 +29,11 @@ body{
     justify-content: center;
     align-items: center;
 }
+button{
+    background: #EC362D;
+    border-radius: 15px;
+    border: none;
+
+    font-size: 18px;
+    color: #FFF5F4;
+}
