@@ -17,29 +17,37 @@
       <!-- HTML for Screen 1 -->
       
       <div class="body1">
-        <div class="seus-quizzes">
-          <p class="ainda-nao-criou">Você não criou nenhum<br>quizz ainda :(</p>
-          <button class="create-quizz" onclick="showScreen3()">Criar Quizz</button>
+        <div class="container-seus-quizzes">
+          <div class="seus-quizzes-vazio">
+            <p class="ainda-nao-criou">Você não criou nenhum<br>quizz ainda :(</p>
+            <button class="create-quizz" onclick="showScreen3()">Criar Quizz</button>
+          </div>
+          <div class="seus-quizzes escondido">
+            <div class="head-seus-quizzes">
+              <p>Seus Quizzes</p>
+              <ion-icon class="new-quizz" name="add-circle"></ion-icon>
+            </div>
+          </div>
         </div>
         <div class="todos-os-quizzees">
           <div class="head-quizz">Todos os Quizzes</div>
           <div onclick="showScreen2()" class="quizz quizz1 quizz-top">
-            <p class="quizz-title">O quanto você sabe de NBA?</p>
+            <div class="quizz-title">O quanto você sabe de NBA?</div>
           </div>
           <div onclick="showScreen2()" class="quizz quizz2 quizz-top">
-            <p class="quizz-title">Só quem é viciado em Breaking Bad vai acertar essas perguntas!</p>
+            <div class="quizz-title">Só quem é viciado em Breaking Bad vai acertar todas as perguntas!</div>
           </div>
           <div onclick="showScreen2()" class="quizz quizz3 quizz-top">
-            <p class="quizz-title">Title</p>
+            <div class="quizz-title">Title</div>
           </div>
           <div onclick="showScreen2()" class="quizz quizz4 quizz-bot">
-            <p class="quizz-title">Title</p>
+            <div class="quizz-title">Title</div>
           </div>
           <div onclick="showScreen2()" class="quizz quizz5 quizz-bot">
-            <p class="quizz-title">Title</p>
+            <div class="quizz-title">Title</div>
           </div>
           <div onclick="showScreen2()" class="quizz quizz6 quizz-bot">
-            <p class="quizz-title">Title</p>
+            <div class="quizz-title">Title</div>
           </div>
         </div>
         <!-- <h1>Screen 1</h1>
