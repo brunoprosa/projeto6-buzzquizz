@@ -211,7 +211,7 @@ button{
 }
 
 .quizz3{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/nba.png");
+    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("https://static.quizur.com/i/b/58e7df25bf6916.5963426758e7df25a17155.50133024.jpg");
     background-size: cover;
 }
 
@@ -294,9 +294,14 @@ button{
     margin-top: 10px;
 }
 
-
-.certa {
-    
+.certa p {
+    color: #009C22;
+}
+.errada p {
+  color: #FF4B4B;  
+}
+.opacidade {
+    opacity: 0.3;
 }
 /*---------------------------TELA 2 --------------------------------*/
 
