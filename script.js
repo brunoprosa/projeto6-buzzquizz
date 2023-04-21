@@ -7,13 +7,17 @@ function showScreen1() {
     document.querySelector('#screen3').classList.add('escondido');
     document.querySelector('#screen34').classList.add('escondido');
   }
-  
+/*---------------------------------------------- screen 2 ----------------------------------------------------*/  
   function showScreen2() {
     document.querySelector('#screen1').classList.add('escondido');
     document.querySelector('#screen2').classList.remove('escondido');
     document.querySelector('#screen3').classList.add('escondido');
   }
-  
+let quizzEscolhido = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/ID_DO_QUIZZ')
+
+
+
+/*----------------------------------------------screen 2 ------------------------------------------------------*/
   function showScreen3() {
     document.querySelector('#screen1').classList.add('escondido');
     document.querySelector('#screen2').classList.add('escondido');
