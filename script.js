@@ -8,28 +8,18 @@ function showScreen1() {
     document.querySelector('#screen34').classList.add('escondido');
   }
 /*---------------------------------------------- screen 2 ----------------------------------------------------*/  
-  function showScreen2() {
+function showScreen2() {
     document.querySelector('#screen1').classList.add('escondido');
     document.querySelector('#screen2').classList.remove('escondido');
     document.querySelector('#screen3').classList.add('escondido');
   }
 
-  let contarSelecionado = 0;
-  function marcarResposta (seletor) {
-    
-    if (seletor.classList.contains('selecionada') !== true && contarSelecionado === 0){
-      if (seletor.id === 'certa') {
-        seletor.classList.add('certa');
-        seletor.classList.add('selecionada');
-        contarSelecionado++;
-      } else {
-        seletor.classList.add('errada');
-        seletor.classList.add('selecionada');
-        contarSelecionado++;
-      }
-    }
-    verificar ();
-  }
+let contarSelecionado = 0;
+
+function scroll () {
+  window.scrollBy(0, 718);
+}
+
   function verificar () {
     let divQuiz = document.querySelector('.quest-quizz');
     let naoSelecionado = divQuiz.querySelectorAll('.opcao');
@@ -45,7 +35,25 @@ function showScreen1() {
       naoSelecionado[i].classList.add('errada');
     }
   } 
+  setTimeout (scroll, 2000)
 }
+
+  function marcarResposta (seletor) {
+    
+    if (seletor.classList.contains('selecionada') !== true && contarSelecionado === 0){
+      if (seletor.id === 'certa') {
+        seletor.classList.add('certa');
+        seletor.classList.add('selecionada');
+        contarSelecionado++;
+      } else {
+        seletor.classList.add('errada');
+        seletor.classList.add('selecionada');
+        contarSelecionado++;
+      }
+    }
+    verificar ();
+  }
+  
 
 /*let quizzPadrão = [
   {
