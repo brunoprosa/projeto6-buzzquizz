@@ -19,13 +19,15 @@
       <div class="body1">
         <div class="container-seus-quizzes">
           <div class="seus-quizzes-vazio">
-            <p class="ainda-nao-criou">Você não criou nenhum<br>quizz ainda :(</p>
-            <button class="create-quizz" onclick="showScreen3()">Criar Quizz</button>
+            <div class="div250">
+              <div class="ainda-nao-criou">Você não criou nenhum<br>quizz ainda :(</div>
+              <button class="create-quizz" onclick="showScreen3()">Criar Quizz</button>
+            </div>
           </div>
           <div class="seus-quizzes escondido">
             <div class="head-seus-quizzes">
               <p>Seus Quizzes</p>
-              <ion-icon class="new-quizz" name="add-circle"></ion-icon>
+              <ion-icon onclick="showScreen3()" class="new-quizz" name="add-circle"></ion-icon>
             </div>
           </div>
         </div>
