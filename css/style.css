@@ -35,13 +35,24 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+h1{
+    font-weight: 700;
+    font-size: 20px;
+    margin: 28px 0 14px 0;
+}
+
 button{
     background: #EC362D;
     border-radius: 15px;
     border: none;
+    height: 52px;
 
-    font-size: 18px;
+    font-size: 21px;
     color: #FFF5F4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*---------------------------TELA 1 --------------------------------*/
@@ -305,11 +316,64 @@ button{
 }
 /*---------------------------TELA 2 --------------------------------*/
 
+/*---------------------------TELA 3 --------------------------------*/
 
-.screen3 h1{
-    font-weight: 700;
-    font-size: 20px;
+.titulo-da-pagina{
+    margin: 65px 0 35px 0;
 }
+
+input{
+    margin: 14px;
+    width: 100%;
+    height: 46px;
+    color: #D1D1D1;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.container-input{
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    padding: 21px 20px 24px 16px;
+    width: 600px;
+    margin-bottom: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+}
+
+.criar-pergunta{
+    width: 369px;
+}
+
+.criar-nivel{
+    width: 354px;
+}
+
+.finalizar-quizz{
+    width: 324px;
+}
+
+.acessar-quiz{
+    width: 220px;
+}
+
+.cinza{
+    color: #818181;
+    background-color: inherit;
+}
+
+.expandir{
+    position: absolute;
+    right: 24px;
+    bottom: 34px;
+
+    font-size: 24px;
+}
+
+/*---------------------------TELA 3 --------------------------------*/
 
 .escondido{
     display: none;
