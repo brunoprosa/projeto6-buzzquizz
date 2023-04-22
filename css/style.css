@@ -279,9 +279,8 @@ button{
 
 .quest-quizz {
     width: 759px;
-    height: 676px;
     background-color: #FFFFFF;
-    
+    margin-bottom: 42px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     padding: 28px;
     display: flex;
