@@ -43,10 +43,10 @@ function renderQuizzes(){
   for(let i = 0; i < quiz.length; i++){
     ulQuizz.innerHTML += `
       <li data-test="others-quiz" class ="quizz quizz${i+1}" style="
-        background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${quiz.image});
+        background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${quiz[i].image});
         background-size:cover;"
         onclick="showScreen2()">
-        <h1>${quiz.title}</h1>
+        <h1 class="quizz-title" >${quiz[i].title}</h1>
       </li>        
     `; 
   }
