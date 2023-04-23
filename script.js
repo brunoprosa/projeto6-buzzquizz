@@ -13,6 +13,46 @@ function showScreen1() {
     document.querySelector('#screen3').classList.add('escondido');
     document.querySelector('#screen34').classList.add('escondido');
   }
+/*---------------------------------------------- screen 1 ----------------------------------------------------*/
+function getQuizzes(){
+      const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
+      promise.then( getOK );
+      promise.catch( getErro );
+  }
+  
+  function getOK(resp){
+      console.log(resp.status);
+      console.log(resp.statusText);
+      console.log(resp.data);
+      quiz = resp.data;
+
+      renderQuizzes()
+  }
+  
+  function getErro(resp){
+      console.log(resp.response.status);
+  }
+
+  getQuizzes();
+
+function renderQuizzes(){
+
+  const ulQuizz = document.querySelector('.others-quiz');
+   ulQuizz.innerHTML = '';
+
+  for(let i = 0; i < quiz.length; i++){
+    ulQuizz.innerHTML += `
+      <li data-test="others-quiz" class ="quizz quizz${i+1}" style="
+        background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${quiz[i].image});
+        background-size:cover;"
+        onclick="showScreen2()">
+        <h1 class="quizz-title" >${quiz[i].title}</h1>
+      </li>        
+    `; 
+  }
+}
+
+/*---------------------------------------------- screen 1 ----------------------------------------------------*/  
 /*---------------------------------------------- screen 2 ----------------------------------------------------*/  
 function showScreen2() {
     document.querySelector('#screen1').classList.add('escondido');
