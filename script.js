@@ -21,14 +21,20 @@ function showScreen2() {
   }
 
 let contarSelecionado = 0;
+let contarQuest = 0;
+
+let contar = 0;
+
+let acertos = 0;
+
+
 
 function scroll () {
   window.scrollBy(0, 718);
 }
 let naoSelecionado = [];
   function verificar (seletor) {
-    let divQuiz = document.querySelector('.quest-quizz');
-    let naoSelecionado = divQuiz.querySelectorAll('.opcao');
+    let naoSelecionado = seletor.querySelectorAll('.opcao');
 
     for (let i = 0; i < naoSelecionado.length; i ++) {
       if (naoSelecionado[i].classList.contains('selecionada') === false) {
@@ -40,115 +46,114 @@ let naoSelecionado = [];
       naoSelecionado[i].classList.add('errada');
     }
   } 
+  contar++;
   contarSelecionado = 0;
   setTimeout (scroll, 2000)
 }
 
   function marcarResposta (seletor) {
-    
-    if (seletor.classList.contains('selecionada') !== true && contarSelecionado === 0){
+      
+    if (seletor.classList.contains('.selecionada') !== true && contarSelecionado === 0){
       if (seletor.classList.contains('true') === true) {
         seletor.classList.add('selecionada');
+        acertos++;
         contarSelecionado++;
       } else {
         seletor.classList.add('selecionada');
         contarSelecionado++;
       }
     }
-    verificar (seletor);
+    verificar (seletor.parentNode);
   }
   
 
 
 //Exibir quiz escolhido pelo usuário
 let quizzEscolhido = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/55');
-quizzEscolhido.then(deuCerto);
-quizzEscolhido.catch(deuRuim);
+quizzEscolhido.then(renderizarQuiz);
+quizzEscolhido.catch(erroRenderizarQuiz);
 
 let aleatorio = [];
-function deuCerto (certo) {
+function renderizarQuiz (quiz) {
   let banner = document.querySelector('.banner');
   banner.innerHTML = '';
-  banner.innerHTML += `<img src="${certo.data.image}"/>
-  <p>${certo.data.title}</p>`
+  banner.innerHTML += `<img src="${quiz.data.image}"/>
+  <p>${quiz.data.title}</p>`
 
-  let quiz = document.querySelector('.quiz');
-  console.log(certo);
-  quiz.innerHTML = '';
-  for (let i = 0; i < certo.data.questions.length; i++ ) {
-    console.log(certo.data.questions[i].answers.length);
-    if (certo.data.questions[i].answers.length === 2) {
-      for (let c = 0; c < certo.data.questions[i].answers.length; c++) {
+  let rendQuiz = document.querySelector('.quiz');
+  rendQuiz.innerHTML = '';
+  for (let i = 0; i < quiz.data.questions.length; i++ ) {
+    if (quiz.data.questions[i].answers.length === 2) {
+      for (let c = 0; c < quiz.data.questions[i].answers.length; c++) {
         aleatorio.push(c);
       }
       aleatorio.sort(function () {
         return 0.5 - Math.random();
       })
-      quiz.innerHTML += `
+      rendQuiz.innerHTML += `
         <div class="quest-quizz">
-        <div class="quest"><p>${certo.data.questions[i].title}</p></div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[0]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[0]].text}</p>
+        <div class="quest"><p>${quiz.data.questions[i].title}</p></div>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
           </div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[1]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[1]].text}</p>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[1]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
           </div>
         </div>`
         aleatorio = [];
       }
 
-    else if (certo.data.questions[i].answers.length === 3) {
-      for (let c = 0; c < certo.data.questions[i].answers.length; c++) {
+    else if (quiz.data.questions[i].answers.length === 3) {
+      for (let c = 0; c < quiz.data.questions[i].answers.length; c++) {
         aleatorio.push(c);
       }
       aleatorio.sort(function () {
         return 0.5 - Math.random();
       })
-      quiz.innerHTML += `
+      rendQuiz.innerHTML += `
         <div class="quest-quizz">
-        <div class="quest"><p>${certo.data.questions[i].title}</p></div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[0]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[0]].text}</p>
+        <div class="quest"><p>${quiz.data.questions[i].title}</p></div>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
           </div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[1]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[1]].text}</p>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[1]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
           </div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[2]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[2]].text}</p>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[2]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[2]].text}</p>
           </div>
         </div>`
         aleatorio = [];
-    } else if (certo.data.questions[i].answers.length === 4) {
-      for (let c = 0; c < certo.data.questions[i].answers.length; c++) {
+    } else if (quiz.data.questions[i].answers.length === 4) {
+      for (let c = 0; c < quiz.data.questions[i].answers.length; c++) {
         aleatorio.push(c);
       }
       aleatorio.sort(function () {
         return 0.5 - Math.random();
       })
-      console.log(aleatorio);
-      quiz.innerHTML += `
+      rendQuiz.innerHTML += `
         <div class="quest-quizz">
-        <div class="quest"><p>${certo.data.questions[i].title}</p></div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[0]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[0]].text}</p>
+        <div class="quest"><p>${quiz.data.questions[i].title}</p></div>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
           </div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[1]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[1]].text}</p>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[1]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
           </div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[2]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[2]].text}</p>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[2]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[2]].text}</p>
           </div>
-          <div class="opcao ${certo.data.questions[i].answers[aleatorio[3]].isCorrectAnswer}" onclick="marcarResposta (this)">
-            <img src="${certo.data.questions[i].answers[aleatorio[3]].image}"/>
-            <p>${certo.data.questions[i].answers[aleatorio[3]].text}</p>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[3]].isCorrectAnswer}" onclick="marcarResposta (this)">
+            <img src="${quiz.data.questions[i].answers[aleatorio[3]].image}"/>
+            <p>${quiz.data.questions[i].answers[aleatorio[3]].text}</p>
           </div>
         </div>`
         aleatorio = [];
@@ -161,8 +166,8 @@ function deuCerto (certo) {
 
 
 
-function deuRuim (ruim) {
-  console.log(ruim);
+function erroRenderizarQuiz () {
+  alert('Ocorreu um erro ao selecionar o quiz. Por favor, tente mais tarde"')
 }
 
 
