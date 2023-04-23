@@ -23,9 +23,6 @@ function getQuizzes(){
   }
   
   function getOK(resp){
-      console.log(resp.status);
-      console.log(resp.statusText);
-      console.log(resp.data);
       quiz = resp.data;
 
       renderQuizzes()
@@ -54,7 +51,6 @@ function renderQuizzes(){
       </li>        
     `; 
   }
-  console.log(valorId);
 }
 
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/  
@@ -74,7 +70,7 @@ let contar = 0;
 
 let acertos = 0;
 let qtdeRespostas = 0;
-
+let qtdeTotalDeRespostas = 0;
 let total = 0;
 let qtdeNivel = [];
 
@@ -86,20 +82,22 @@ function resultado (resul) {
   console.log(total);
   console.log(resul); 
   let qtdeAcerto = (acertos / qtdeRespostas)*100;
-  let valorArredondado = Math.round(qtdeAcerto);
+  let valorArredondado = Math.round(qtdeAcerto) + '%';
   console.log(valorArredondado);
   
 }
 
 function scroll () {
   let proxDiv = document.getElementsByClassName("quest-quizz")[contar];
-  proxDiv.scrollIntoView({behavior: 'smooth'});
-  //console.log(quizzEscolhido.data.questions.length);
   
-  //resultado(quizzEscolhido);
-  /*console.log(contar);
+  contar++;
+  contarSelecionado = 0;
   console.log(acertos);
-  console.log(qtdeRespostas);*/
+  console.log(qtdeRespostas);
+  while (qtdeTotalDeRespostas > qtdeRespostas) {
+    console.log('foi');
+    proxDiv.scrollIntoView({behavior: 'smooth'});
+  }
 }
 
   function verificar (seletor) {
@@ -115,8 +113,7 @@ function scroll () {
       naoSelecionado[i].classList.add('errada');
     }
   } 
-  contar++;
-  contarSelecionado = 0;
+  
   setTimeout (scroll, 2000)
 }
 
@@ -134,6 +131,7 @@ function scroll () {
         contarSelecionado++;
       }
     }
+
     verificar (seletor.parentNode);
   }
   
@@ -143,13 +141,13 @@ function renderizarQuizEscolhido () {
   let select = document.querySelector('.select');
   let id = select.id;
   let quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
-  console.log(quizzEscolhido);
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
 
 let aleatorio = [];
 function renderizarQuiz (quiz) {
+  console.log(quiz);
   let banner = document.querySelector('.banner');
   banner.innerHTML = '';
   banner.innerHTML += `<img src="${quiz.data.image}"/>
@@ -237,7 +235,9 @@ function renderizarQuiz (quiz) {
   let resultado = document.querySelector('.caixa-resultado');
   resultado.innerHTML = '';
   total = `${quiz.data.levels.length}`;
-
+  console.log(total);
+  qtdeTotalDeRespostas = `${quiz.data.questions.length}`;
+  console.log(qtdeTotalDeRespostas);
 }
 
 
