@@ -26,11 +26,17 @@ let contarQuest = 0;
 let contar = 0;
 
 let acertos = 0;
-
+let qtdeRespostas = 0;
 
 
 function scroll () {
-  window.scrollBy(0, 718);
+  let proxDiv = document.getElementsByClassName("quest-quizz")[contar];
+  console.log(proxDiv);
+  proxDiv.scrollIntoView({ behavior: 'smooth'});
+  
+console.log(contar);
+console.log(acertos);
+console.log(qtdeRespostas);
 }
 let naoSelecionado = [];
   function verificar (seletor) {
@@ -57,16 +63,17 @@ let naoSelecionado = [];
       if (seletor.classList.contains('true') === true) {
         seletor.classList.add('selecionada');
         acertos++;
+        qtdeRespostas++;
         contarSelecionado++;
       } else {
         seletor.classList.add('selecionada');
+        qtdeRespostas++;
         contarSelecionado++;
       }
     }
     verificar (seletor.parentNode);
   }
   
-
 
 //Exibir quiz escolhido pelo usuário
 let quizzEscolhido = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/55');
@@ -167,7 +174,7 @@ function renderizarQuiz (quiz) {
 
 
 function erroRenderizarQuiz () {
-  alert('Ocorreu um erro ao selecionar o quiz. Por favor, tente mais tarde"')
+  alert('Ocorreu um erro ao selecionar o quiz. Por favor, tente mais tarde!')
 }
 
 
