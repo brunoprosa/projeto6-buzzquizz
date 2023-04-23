@@ -176,7 +176,9 @@ button{
     height: 409px;
 
     margin-top: 77px;
+}
 
+.others-quiz{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -203,8 +205,12 @@ button{
 
     border-radius: 5px;
 
+    margin-top: 12px;
+
     display: flex;
     justify-content: center;
+
+    position: relative;
 }
 
 .quizz-title{
@@ -222,42 +228,9 @@ button{
     justify-content: center;
 
     color: #FFFFFF;
-}
 
-.quizz-bot{
-    margin-top: 12px;
+    position: absolute;
 }
-
-.quizz1{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/nba.png");
-    background-size: cover;
-}
-
-.quizz2{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/breaking-bad.png");
-    background-size: cover;
-}
-
-.quizz3{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("https://static.quizur.com/i/b/58e7df25bf6916.5963426758e7df25a17155.50133024.jpg");
-    background-size: cover;
-}
-
-.quizz4{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/breaking-bad.png");
-    background-size: cover;
-}
-
-.quizz5{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/nba.png");
-    background-size: cover;
-}
-
-.quizz6{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/breaking-bad.png");
-    background-size: cover;
-}
-
 /*---------------------------TELA 1 --------------------------------*/
 /*---------------------------TELA 2 --------------------------------*/
 .body2 {
@@ -417,6 +390,12 @@ input{
     }
 }
 
+@media (max-width: 759px){
+    .quest-quizz {
+        width: 100%;
+    }
+}
+
 @media (max-width: 1100px){
     .body1{
         padding: 31px 17px 31px 18px;
@@ -441,7 +420,7 @@ input{
 
     .quizz{
         margin-top: 14px;
-    }   
+    }
 }
 
 
