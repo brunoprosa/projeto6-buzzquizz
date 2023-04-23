@@ -28,17 +28,33 @@ let contar = 0;
 let acertos = 0;
 let qtdeRespostas = 0;
 
+let total = 0;
+let qtdeNivel = [];
+
+let naoSelecionado = [];
+
+
+function resultado (resul) {
+  
+  console.log(total);
+  console.log(resul); 
+  let qtdeAcerto = (acertos / qtdeRespostas)*100;
+  let valorArredondado = Math.round(qtdeAcerto);
+  console.log(valorArredondado);
+  
+}
 
 function scroll () {
   let proxDiv = document.getElementsByClassName("quest-quizz")[contar];
-  console.log(proxDiv);
-  proxDiv.scrollIntoView({ behavior: 'smooth'});
+  proxDiv.scrollIntoView({behavior: 'smooth'});
+  //console.log(quizzEscolhido.data.questions.length);
   
-console.log(contar);
-console.log(acertos);
-console.log(qtdeRespostas);
+  //resultado(quizzEscolhido);
+  /*console.log(contar);
+  console.log(acertos);
+  console.log(qtdeRespostas);*/
 }
-let naoSelecionado = [];
+
   function verificar (seletor) {
     let naoSelecionado = seletor.querySelectorAll('.opcao');
 
@@ -77,6 +93,7 @@ let naoSelecionado = [];
 
 //Exibir quiz escolhido pelo usuário
 let quizzEscolhido = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/55');
+console.log(quizzEscolhido);
 quizzEscolhido.then(renderizarQuiz);
 quizzEscolhido.catch(erroRenderizarQuiz);
 
@@ -162,13 +179,15 @@ function renderizarQuiz (quiz) {
             <img src="${quiz.data.questions[i].answers[aleatorio[3]].image}"/>
             <p>${quiz.data.questions[i].answers[aleatorio[3]].text}</p>
           </div>
-        </div>`
+        </div>
+        <div class="quest-quizz"</div>`
         aleatorio = [];
-    }
-    
-    
+    }  
   }
-  
+  let resultado = document.querySelector('.caixa-resultado');
+  resultado.innerHTML = '';
+  total = `${quiz.data.levels.length}`;
+
 }
 
 

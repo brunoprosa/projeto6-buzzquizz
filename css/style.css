@@ -278,7 +278,7 @@ button{
     height: 100%;
     background-size: cover;
     background-color: #000000;
-    opacity: 0.6;
+    opacity: 0.6 #000000;
     position: relative;
 }
 
@@ -346,6 +346,44 @@ button{
 .opacidade {
     opacity: 0.3;
 }
+
+.caixa-resultado {
+    width: 759px;
+    height: 430px;
+}
+.titulo-resultado {
+    width: 727px;
+    height: 99px;
+    background-color: #EC362D;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+.titulo-resultado p {
+    font-size: 23px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+.resultado {
+    display: flex;
+    justify-content: space-around;
+}
+.resultado img {
+    width: 364px;
+    height: 273px;
+    margin-right: 21px;
+}
+.resultado p {
+    width: 328px;
+    height: 250px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #484848;
+}
+
 /*---------------------------TELA 2 --------------------------------*/
 
 /*---------------------------TELA 3 --------------------------------*/
