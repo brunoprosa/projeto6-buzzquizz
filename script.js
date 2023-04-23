@@ -3,6 +3,8 @@ axios.defaults.headers.common['Authorization'] = 'QvrjsZKGJ1H8evjKA56QR65s';
 let informacaoBasic = {};
 let questions = [];
 let answers = [];
+let valorId = [];
+let quiz;
 let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveiss');
 let screen34 = document.querySelector('#screen34');
@@ -41,24 +43,29 @@ function renderQuizzes(){
    ulQuizz.innerHTML = '';
 
   for(let i = 0; i < quiz.length; i++){
+    valorId.push(quiz[i].id);
     ulQuizz.innerHTML += `
-      <li data-test="others-quiz" class ="quizz quizz${i+1}" style="
+  
+      <li data-test="others-quiz" id ="${quiz[i].id}" class ="quizz quizz${i+1}" style="
         background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${quiz[i].image});
         background-size:cover;"
-        onclick="showScreen2()">
+        onclick="showScreen2(this)">
         <h1 class="quizz-title" >${quiz[i].title}</h1>
       </li>        
     `; 
   }
+  console.log(valorId);
 }
 
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/  
 /*---------------------------------------------- screen 2 ----------------------------------------------------*/  
-function showScreen2() {
+function showScreen2(select) {
+    select.classList.add('select');
     document.querySelector('#screen1').classList.add('escondido');
     document.querySelector('#screen2').classList.remove('escondido');
     document.querySelector('#screen3').classList.add('escondido');
-  }
+    renderizarQuizEscolhido ();
+}
 
 let contarSelecionado = 0;
 let contarQuest = 0;
@@ -132,10 +139,14 @@ function scroll () {
   
 
 //Exibir quiz escolhido pelo usuário
-let quizzEscolhido = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/55');
-console.log(quizzEscolhido);
-quizzEscolhido.then(renderizarQuiz);
-quizzEscolhido.catch(erroRenderizarQuiz);
+function renderizarQuizEscolhido () {
+  let select = document.querySelector('.select');
+  let id = select.id;
+  let quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
+  console.log(quizzEscolhido);
+  quizzEscolhido.then(renderizarQuiz);
+  quizzEscolhido.catch(erroRenderizarQuiz);
+}
 
 let aleatorio = [];
 function renderizarQuiz (quiz) {
@@ -156,7 +167,7 @@ function renderizarQuiz (quiz) {
       })
       rendQuiz.innerHTML += `
         <div class="quest-quizz">
-        <div class="quest"><p>${quiz.data.questions[i].title}</p></div>
+        <div class="quest" "style="background-color: ${quiz.data.questions[i].color}"><p>${quiz.data.questions[i].title}</p></div>
           <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
             <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
             <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
@@ -178,7 +189,7 @@ function renderizarQuiz (quiz) {
       })
       rendQuiz.innerHTML += `
         <div class="quest-quizz">
-        <div class="quest"><p>${quiz.data.questions[i].title}</p></div>
+        <div class="quest" "style="background-color: ${quiz.data.questions[i].color}"><p>${quiz.data.questions[i].title}</p></div>
           <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
             <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
             <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
@@ -202,7 +213,7 @@ function renderizarQuiz (quiz) {
       })
       rendQuiz.innerHTML += `
         <div class="quest-quizz">
-        <div class="quest"><p>${quiz.data.questions[i].title}</p></div>
+        <div class="quest" style="background-color: ${quiz.data.questions[i].color}"><p>${quiz.data.questions[i].title}</p></div>
           <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
             <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
             <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
@@ -219,8 +230,7 @@ function renderizarQuiz (quiz) {
             <img src="${quiz.data.questions[i].answers[aleatorio[3]].image}"/>
             <p>${quiz.data.questions[i].answers[aleatorio[3]].text}</p>
           </div>
-        </div>
-        <div class="quest-quizz"</div>`
+        </div>`
         aleatorio = [];
     }  
   }
