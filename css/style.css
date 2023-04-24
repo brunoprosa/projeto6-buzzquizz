@@ -178,6 +178,12 @@ button{
     margin-top: 77px;
 }
 
+.my-quizzes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .others-quiz{
     display: flex;
     flex-wrap: wrap;

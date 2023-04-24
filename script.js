@@ -42,6 +42,10 @@ function showScreen1() {
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
 /*---------------------------Meus Quizzes-----------------------------*/
 function yourQuizzes(){
+  const pegarQuiz = localStorage.getItem("idsLocais");
+  const pegarQuizOK = JSON.parse(pegarQuiz);
+  console.log(ids);
+
   if (ids.length === 0){
     semQuiz.classList.remove('.escondido');
     comQuiz.classList.add('escondido');
@@ -50,6 +54,29 @@ function yourQuizzes(){
     semQuiz.classList.add('.escondido');
     comQuiz.classList.remove('escondido');
     console.log('tem quizz');
+    MyQuizzes()
+  }
+}
+
+function MyQuizzes(){
+  const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
+  promise.then( renderMyQuizzes() );
+}
+
+function renderMyQuizzes(){
+  const ulMyQuizz = document.querySelector('.my-quizzes');
+   ulMyQuizz.innerHTML = '';
+
+  for(let i = 0; i < ids.length; i++){
+    ulMyQuizz.innerHTML += `
+  
+      <li data-test="my-quiz" id ="${ids[i].id}" class="quizz" style="
+        background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${ids[i].image});
+        background-size:cover;"
+        onclick="showScreen2(this)">
+        <h1 class="quizz-title" >${ids[i].title}</h1>
+      </li>        
+    `; 
   }
 }
 
@@ -458,15 +485,17 @@ function criarNiveis(){
 function finalizarCriarQuizz(resposta){
   document.querySelector('.fimDaCriacao').innerHTML += `
   
-  <li data-test="success-banner" id ="${resposta.id}" class ="quizz" style="
-    background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${resposta.image});
+  <li data-test="success-banner" id ="${resposta.data.id}" class ="quizz" style="
+    background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${resposta.data.image});
     background-size:cover;"
     onclick="showScreen2(this)">
-    <h1 class="quizz-title" >${resposta.title}</h1>
+    <h1 class="quizz-title" >${resposta.data.title}</h1>
   </li>        
 `; 
 
-  const id = {id: resposta.id};
+console.log(resposta.data.id);
+
+  const id = {id: resposta.data.id};
   ids.push(id);
   console.log(ids);
   const idsString = JSON.stringify(ids);
@@ -484,9 +513,9 @@ function erroDeEnvio(erro){
 
 function acessarQuizDiretamete(){
   const pegarQuiz = localStorage.getItem("idsLocais");
-  pegarQuiz = JSON.parse(pegarQuiz);
-  console.log(pegarQuiz)
-  const id = pegarQuiz[pegarQuiz.length];
+  const pegarQuizOK = JSON.parse(pegarQuiz);
+  console.log(pegarQuizOK)
+  const id = pegarQuizOK[pegarQuizOK.length];
   const quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
