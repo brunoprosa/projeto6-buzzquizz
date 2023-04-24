@@ -454,7 +454,7 @@ function criarNiveis(){
   promise.then(showScreen34);
   promise.catch(erroDeEnvio);
 
-  
+
 }
 
 function erroDeEnvio(erro){
