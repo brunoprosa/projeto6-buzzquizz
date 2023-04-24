@@ -75,28 +75,55 @@ let total = 0;
 let qtdeNivel = [];
 
 let naoSelecionado = [];
-
+let lvl = [];
 
 function resultado (resul) {
   
   console.log(total);
   console.log(resul); 
   let qtdeAcerto = (acertos / qtdeRespostas)*100;
-  let valorArredondado = Math.round(qtdeAcerto) + '%';
+  let valorArredondado = Math.round(qtdeAcerto);
   console.log(valorArredondado);
+  console.log(lvl);
+    for (let i = 0; i < lvl.length; i++) {
+      if (lvl[length - 1].minValue === valorArredondado) {
+        let mostrarResultado = document.querySelector('.caixa-resultado');
+        mostrarResultado.innerHTML = '';
+        mostrarResultado += `
+        <div class="titulo-resultado><p>${valorArredondado}% de acerto: ${lvl[i].title}</p></div>
+        <div class="resultado">
+          <img src="${lvl[i].image}/>
+          <p>${lvl[i].text}</p>
+        `
+      } else if (lvl[i].minValue <= valorArredondado && lvl[i + 1].minValue > valorArredondado) {
+        let mostrarResultado = document.querySelector('.caixa-resultado');
+        mostrarResultado.innerHTML = '';
+        mostrarResultado += `
+        <div class="titulo-resultado><p>${valorArredondado}% de acerto: ${lvl[i].title}</p></div>
+        <div class="resultado">
+          <img src="${lvl[i].image}/>
+          <p>${lvl[i].text}</p>
+          `
+      } 
+    }
+ 
   
 }
 
 function scroll () {
   let proxDiv = document.getElementsByClassName("quest-quizz")[contar];
   
-  contar++;
+  
   contarSelecionado = 0;
   console.log(acertos);
   console.log(qtdeRespostas);
-  while (qtdeTotalDeRespostas > qtdeRespostas) {
+  if (qtdeTotalDeRespostas > qtdeRespostas) {
     console.log('foi');
     proxDiv.scrollIntoView({behavior: 'smooth'});
+  } else {
+    let irResul = document.querySelector(".caixa-resultado");
+    irResul.scrollIntoView({behavior: 'smooth'});
+    resultado ();
   }
 }
 
@@ -113,7 +140,7 @@ function scroll () {
       naoSelecionado[i].classList.add('errada');
     }
   } 
-  
+  contar++;
   setTimeout (scroll, 2000)
 }
 
@@ -147,7 +174,8 @@ function renderizarQuizEscolhido () {
 
 let aleatorio = [];
 function renderizarQuiz (quiz) {
-  console.log(quiz);
+  lvl.push(quiz.data.levels);
+  console.log(lvl);
   let banner = document.querySelector('.banner');
   banner.innerHTML = '';
   banner.innerHTML += `<img src="${quiz.data.image}"/>

@@ -343,6 +343,7 @@ button{
 .resultado {
     display: flex;
     justify-content: space-around;
+    overflow-wrap: break-word;
 }
 .resultado img {
     width: 364px;
