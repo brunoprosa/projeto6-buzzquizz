@@ -435,6 +435,7 @@ input{
 
 .acessar-quiz{
     width: 220px;
+    margin: 5% 0 9px 0;
 }
 
 .cinza{
@@ -453,6 +454,13 @@ input{
 /*---------------------------TELA 3 --------------------------------*/
 
 /*------------------RESPONSIVO TELA ATÉ 1100PX----------------------*/
+
+@media (max-width: 600px){
+    .container-input{
+        width: 100%;
+    }
+}
+
 @media (max-width: 730px){
     .todos-os-quizzees{
         width: 100%;
