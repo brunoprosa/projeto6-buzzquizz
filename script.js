@@ -4,10 +4,14 @@ let informacaoBasic = {};
 let questions = [];
 let answers = [];
 let valorId = [];
+const ids = [];
 let quiz;
 let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveiss');
 let screen34 = document.querySelector('#screen34');
+
+let semQuiz = document.querySelector('.seus-quizzes-vazio');
+let comQuiz = document.querySelector('.seus-quizzes');
 
 let contarSelecionado = 0;
 
@@ -32,8 +36,25 @@ function showScreen1() {
     document.querySelector('#screen2').classList.add('escondido');
     document.querySelector('#screen3').classList.add('escondido');
     document.querySelector('#screen34').classList.add('escondido');
+    yourQuizzes();
   }
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
+/*---------------------------Meus Quizzes-----------------------------*/
+function yourQuizzes(){
+  if (ids.length === 0){
+    semQuiz.classList.remove('.escondido');
+    comQuiz.classList.add('escondido');
+    console.log('não tem quizz');
+  }else{
+    semQuiz.classList.add('.escondido');
+    comQuiz.classList.remove('escondido');
+    console.log('tem quizz');
+  }
+}
+
+yourQuizzes();
+/*---------------------------Meus Quizzes-----------------------------*/
+/*---------------------------Other Quizzes----------------------------*/
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -70,7 +91,7 @@ function renderQuizzes(){
     `; 
   }
 }
-
+/*---------------------------Other Quizzes----------------------------*/
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/  
 /*---------------------------------------------- screen 2 ----------------------------------------------------*/  
 function showScreen2(select) {
@@ -352,7 +373,6 @@ function criarPerguntas(){
   }
   showScreen33();
 }
-
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
