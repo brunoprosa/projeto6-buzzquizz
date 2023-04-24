@@ -35,8 +35,6 @@ function showScreen1() {
     document.querySelector('#screen34').classList.add('escondido');
   }
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
-<<<<<<< HEAD
-=======
 /*---------------------------Meus Quizzes-----------------------------*/
 function yourQuizzes(){
   if (ids.length === 0){
@@ -54,7 +52,6 @@ yourQuizzes();
 
 /*---------------------------Meus Quizzes-----------------------------*/
 /*---------------------------Other Quizzes----------------------------*/
->>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -492,8 +489,6 @@ function erroDeEnvio(erro){
   console.log(erro);
 }
 
-<<<<<<< HEAD
-=======
 function acessarQuizDiretamete(){
   const pegarQuiz = localStorage.getItem("idsLocais");
   pegarQuiz = JSON.parse(pegarQuiz);
@@ -503,7 +498,6 @@ function acessarQuizDiretamete(){
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
->>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
