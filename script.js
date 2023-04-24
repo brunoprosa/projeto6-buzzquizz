@@ -85,10 +85,7 @@ yourQuizzes();
 
 /*---------------------------Meus Quizzes-----------------------------*/
 /*---------------------------Other Quizzes----------------------------*/
-<<<<<<< HEAD
-=======
 
->>>>>>> 0253327b3facd7cd813c15702d0c835fd84d16dc
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -537,10 +534,7 @@ function acessarQuizDiretamete(){
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 0253327b3facd7cd813c15702d0c835fd84d16dc
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
