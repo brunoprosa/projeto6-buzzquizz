@@ -51,14 +51,22 @@
       </div>
 
     <div> 
+      <button onclick="showScreen1()">screen 1</button>
+      <button onclick="showScreen3()">screen 3</button>
+    </div> 
+
     <div>
       <button class="reinicia" onclick="reinicia()">Reiniciar Quizz</button>
       <div class="home" onclick="showScreen1()"><p>Voltar Home</p></div>
     </div>
+    </div>
     <!-- HTML for Screen 2 -->
+
     <div class="screen escondido" id="screen3">
       <div class="screen centralizar" id="screen31">
+
         <!--info basica do quiz-->
+
         <h1 class="titulo-da-pagina">Comece pelo começo</h1>
         <div class="container-input">
         <input type=text id="titulo" placeholder="Título do seu quizz">
@@ -69,7 +77,9 @@
         <button class="criar-pergunta" onclick="informacaoBasica()">Prosseguir pra criar perguntas</button>
       </div>
       <div class="screen centralizar escondido" id="screen32">
+        
         <!--criar as perguntas do quiz-->
+
           <h1 class="titulo-da-pagina">Crie suas perguntas</h1>
           <div class="container-criar-pergunta">
             <div class="criar-pergunta1 container-input">
@@ -133,6 +143,9 @@
             </div>
           </div>
         <button class="criar-nivel" onclick="criarPerguntas()">Prosseguir pra criar níveis</button>
+        
+          <!--criar as niveis do quiz-->
+
       </div>
       <div class="screen centralizar  escondido" id="screen33">
         <h1 class="titulo-da-pagina">Agora, decida os níveis</h1>
@@ -156,7 +169,10 @@
             <input type="text" id="textNivel2" placeholder="Descrição do nível">
           </div>
         </div>
-        <button class="finalizar-quizz" onclick="showScreen34()">Finalizar Quizz</button>
+        <button class="finalizar-quizz" onclick="criarNiveis()">Finalizar Quizz</button>
+
+        <!--finalizar criação do quiz-->
+
       </div>
       <div class="screen centralizar escondido" id="screen34">
         <h1 class="titulo-da-pagina">Seu quizz está pronto!</h1>
@@ -164,6 +180,8 @@
         <button class="cinza" onclick="showScreen1()">Voltar pra home</button>
       </div>
     </div>
+
+
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>

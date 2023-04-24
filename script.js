@@ -3,11 +3,12 @@ axios.defaults.headers.common['Authorization'] = 'QvrjsZKGJ1H8evjKA56QR65s';
 let informacaoBasic = {};
 let questions = [];
 let answers = [];
+let levels = [];
 let valorId = [];
 const ids = [];
 let quiz;
 let screen32 = document.querySelector('.container-criar-pergunta');
-let screen33 = document.querySelector('.container-criar-niveiss');
+let screen33 = document.querySelector('.container-criar-niveis');
 let screen34 = document.querySelector('#screen34');
 
 let semQuiz = document.querySelector('.seus-quizzes-vazio');
@@ -318,11 +319,16 @@ function informacaoBasica(){
   const qntdniveis = Number(document.querySelector('#qntdNiveis').value);
   informacaoBasic = {
     title: titulo,
-    url: url,
+    image: url,
     quantPerguntas: qntdperguntas,
     quantNiveis: qntdniveis
   };
   
+  if(titulo.length < 20 || titulo.length > 65 || url.substring(0,5) !== 'https' || qntdperguntas < 3 || qntdniveis < 2){
+    alert('Título do quizz: deve ter no mínimo 20 e no máximo 65 caracteres. \n URL da Imagem: deve ter formato de URL. \n Quantidade de perguntas: no mínimo 3 perguntas. \n Quantidade de níveis: no mínimo 2 níveis.');
+    return
+  }
+
   screen32.innerHTML = ''
   for(i = 1; i <= qntdperguntas; i++){
     screen32.innerHTML += `
@@ -335,17 +341,17 @@ function informacaoBasica(){
       <input type="text" id="textPergunta${i}" placeholder="Texto da pergunta">
       <input type="text" id="colorPergunta${i}" placeholder="Cor de fundo da pergunta">
       <h1>Resposta correta</h1>
-      <input type="text" id="respostaCerta${i}" placeholder="Resposta correta">
-      <input type="text" id="imgCerta${i}" placeholder="URL da imagem">
+      <input type="text" id="Cresposta${i}1" placeholder="Resposta correta">
+      <input type="text" id="imgResposta${i}1" placeholder="URL da imagem">
       <h1>Respostas incorretas</h1>
-      <input type="text" id="respostaErrada${i}1" placeholder="Resposta incorreta 1">
-      <input type="text" class="margin32" id="imgErrada${i}1" placeholder="URL da imagem 1">
+      <input type="text" id="Cresposta${i}2" placeholder="Resposta incorreta 1">
+      <input type="text" class="margin32" id="imgResposta${i}2" placeholder="URL da imagem 1">
 
-      <input type="text" id="respostaErrada${i}2" placeholder="Resposta incorreta 2">
-      <input type="text" class="margin32" id="imgErrada${i}2" placeholder="URL da imagem 2">
+      <input type="text" id="Cresposta${i}3" placeholder="Resposta incorreta 2">
+      <input type="text" class="margin32" id="imgResposta${i}3" placeholder="URL da imagem 2">
 
-      <input type="text" id="respostaErrada${i}3" placeholder="Resposta incorreta 3">
-      <input type="text" id="imgErrada${i}3" placeholder="URL da imagem 3">
+      <input type="text" id="Cresposta${i}4" placeholder="Resposta incorreta 3">
+      <input type="text" id="imgResposta${i}4" placeholder="URL da imagem 3">
     </div>
     `;
   }
@@ -353,10 +359,42 @@ function informacaoBasica(){
 }
 
 function criarPerguntas(){
+  let pergunta = {};
+  let resposta = {};
+  for(i = 1; i <= informacaoBasic.quantPerguntas; i++){
+    for(j = 1; j < 5; j++){
+      if(document.querySelector(`#Cresposta${i}${j}`).value !== '' && document.querySelector(`#imgResposta${i}${j}`).value !== ''){
+        resposta = {
+          text: document.querySelector(`#Cresposta${i}${j}`).value,
+          image: document.querySelector(`#imgResposta${i}${j}`).value,
+          isCorrectAnswer: j === 1
+        };
+        answers.push(resposta);
+      }
+    }
 
+    const titulo = document.querySelector(`#textPergunta${i}`).value;
+    const cor = document.querySelector(`#colorPergunta${i}`).value;
+
+    if (titulo < 20 || cor.length !== 7 || answers.length < 2 ){
+      alert('Texto da pergunta: no mínimo 20 caracteres. \n Cor de fundo: deve ser uma cor em hexadecimal (começar em "#", seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F). \n Textos das respostas: não pode estar vazio. \n URL das imagens de resposta: deve ter formato de URL. \n É obrigatória a inserção da resposta correta e de pelo menos 1 resposta errada. Portanto, é permitido existirem perguntas com só 2 ou 3 respostas em vez de 4.');
+      answers = [];
+      questions = [];
+      return;
+    }
+
+    pergunta = {
+      title: titulo,
+      color: cor,
+      answers: answers
+    };
+    questions.push(pergunta);
+    console.log(questions);
+    answers = [];
+  }
 
   screen33.innerHTML = '';
-  for(i = 1; i <= informacaoBasic.qntdniveis; i++){
+  for(i = 1; i <= informacaoBasic.quantNiveis; i++){
     screen33.innerHTML += `
     <div class="previa-nivel${i} container-input">
       <h1>Nível ${i}</h1>
@@ -371,7 +409,56 @@ function criarPerguntas(){
     </div>
     `;
   }
+
   showScreen33();
+
+}
+
+function criarNiveis(){
+  let niveis = {};
+  let zero = 0;
+  for(i = 1; i <= informacaoBasic.quantniveis; i++){
+    niveis = {
+      title: document.querySelector(`#tituloDoNivel${i}`).value,
+      image: document.querySelector(`#imgNivel${i}`).value,
+      text: document.querySelector(`#textNivel${i}`).value,
+      minValue: Number(document.querySelector(`#notaMinima${i}`).value)
+    };
+
+    if(niveis.minValue === 0){
+      zero++;
+    }
+
+    if(niveis.title.length < 10 || niveis.minValue > 100 || niveis.minValue < 0 || niveis.image.substring(0,5) !== 'https' || niveis.text.length < 30 || i - zero === informacaoBasic.quantNiveis){
+      alert('Título do nível: mínimo de 10 caracteres. \n % de acerto mínima: um número entre 0 e 100. \n URL da imagem do nível: deve ter formato de URL. \n Descrição do nível: mínimo de 30 caracteres. \n É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%.');
+      levels = [];
+      return;
+    }
+
+    levels.push(niveis);
+  }
+  
+  const quizz = {
+    title: informacaoBasic.title,
+    image: informacaoBasic.image,
+    questions: questions,
+    levels: levels
+  }
+
+  console.log(quizz);
+
+  questions = [];
+  levels = [];
+
+  const promise = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes', quizz);
+  promise.then(showScreen34);
+  promise.catch(erroDeEnvio);
+
+  
+}
+
+function erroDeEnvio(erro){
+  console.log(erro);
 }
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
