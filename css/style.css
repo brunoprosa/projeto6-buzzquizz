@@ -298,6 +298,7 @@ button{
     width: 330px;
     height: 217px;
     margin-top: 20px;
+    cursor: pointer;
 }
 .opcao img {
     width: 100%;
@@ -323,6 +324,15 @@ button{
 .caixa-resultado {
     width: 759px;
     height: 430px;
+    background-color: #FFFFFF;
+    margin-bottom: 42px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: space-around;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
 .titulo-resultado {
     width: 727px;
@@ -341,6 +351,8 @@ button{
     color: #FFFFFF;
 }
 .resultado {
+    width: 727px;
+    height: 277px;
     display: flex;
     justify-content: space-around;
     overflow-wrap: break-word;
@@ -352,12 +364,34 @@ button{
 }
 .resultado p {
     width: 328px;
-    height: 250px;
+    height: 273px;
     font-size: 19px;
     font-weight: 700;
     color: #484848;
 }
 
+.reinicia {
+    width: 260px;
+    height: 52px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    margin: 50px auto 16px;
+    cursor: pointer;
+}
+.home {
+    width: 219px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 50px;
+    cursor: pointer;
+}
+.home p{
+    font-size: 21px;
+    font-weight: 400;
+    color: #818181;
+}
 /*---------------------------TELA 2 --------------------------------*/
 
 /*---------------------------TELA 3 --------------------------------*/

@@ -9,6 +9,24 @@ let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveiss');
 let screen34 = document.querySelector('#screen34');
 
+let contarSelecionado = 0;
+
+let contar = 0;
+
+let acertos = 0;
+let qtdeRespostas = 0;
+let qtdeTotalDeRespostas = 0;
+let total = 0;
+let qtdeNivel = [];
+
+let naoSelecionado = [];
+let lvl = [];
+
+
+let reiniciarQuiz = [];
+let aleatorio = [];
+let id;
+
 function showScreen1() {
     document.querySelector('#screen1').classList.remove('escondido');
     document.querySelector('#screen2').classList.add('escondido');
@@ -62,52 +80,57 @@ function showScreen2(select) {
     document.querySelector('#screen3').classList.add('escondido');
     renderizarQuizEscolhido ();
 }
+function reinicia () {
+  let restart = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
+  contarSelecionado = 0;
+  contar = 0;
+  acertos = 0;
+  qtdeRespostas = 0;
+  qtdeTotalDeRespostas = 0;
+  total = 0;
+  qtdeNivel = [];
 
-let contarSelecionado = 0;
-let contarQuest = 0;
+  naoSelecionado = [];
+  lvl = [];
 
-let contar = 0;
+  restart.then(renderizarQuiz);
+  restart.catch(erroRenderizarQuiz);
+}
 
-let acertos = 0;
-let qtdeRespostas = 0;
-let qtdeTotalDeRespostas = 0;
-let total = 0;
-let qtdeNivel = [];
-
-let naoSelecionado = [];
-let lvl = [];
-
-function resultado (resul) {
-  
-  console.log(total);
-  console.log(resul); 
+function resultado (lvl) {
   let qtdeAcerto = (acertos / qtdeRespostas)*100;
   let valorArredondado = Math.round(qtdeAcerto);
-  console.log(valorArredondado);
-  console.log(lvl);
-    for (let i = 0; i < lvl.length; i++) {
-      if (lvl[length - 1].minValue === valorArredondado) {
-        let mostrarResultado = document.querySelector('.caixa-resultado');
-        mostrarResultado.innerHTML = '';
-        mostrarResultado += `
-        <div class="titulo-resultado><p>${valorArredondado}% de acerto: ${lvl[i].title}</p></div>
+  let mostrarResultado = document.querySelector('.caixa-resultado');
+  mostrarResultado.scrollIntoView({behavior: 'smooth'});
+  mostrarResultado.classList.remove('escondido');
+  mostrarResultado.innerHTML = '';
+
+    for (let i = 0; i < total; i++) {
+      if (lvl.data.levels[i].minValue === valorArredondado) {
+        mostrarResultado.innerHTML += `
+        <div class="titulo-resultado"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
         <div class="resultado">
-          <img src="${lvl[i].image}/>
-          <p>${lvl[i].text}</p>
+          <img src="${lvl.data.levels[i].image}"/>
+          <p>${lvl.data.levels[i].text}</p>
+        </div>
         `
-      } else if (lvl[i].minValue <= valorArredondado && lvl[i + 1].minValue > valorArredondado) {
-        let mostrarResultado = document.querySelector('.caixa-resultado');
-        mostrarResultado.innerHTML = '';
-        mostrarResultado += `
-        <div class="titulo-resultado><p>${valorArredondado}% de acerto: ${lvl[i].title}</p></div>
+        
+      } else if (lvl.data.levels[i].minValue <= valorArredondado && lvl.data.levels[i + 1].minValue > valorArredondado) {
+        mostrarResultado.innerHTML += `
+        <div class="titulo-resultado"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
         <div class="resultado">
-          <img src="${lvl[i].image}/>
-          <p>${lvl[i].text}</p>
-          `
+          <img src="${lvl.data.levels[i].image}"/>
+          <p>${lvl.data.levels[i].text}</p>
+        </div>
+        `
       } 
     }
  
   
+}
+
+function chamarResultado() {
+  resultado (lvl[0]);
 }
 
 function scroll () {
@@ -115,15 +138,10 @@ function scroll () {
   
   
   contarSelecionado = 0;
-  console.log(acertos);
-  console.log(qtdeRespostas);
   if (qtdeTotalDeRespostas > qtdeRespostas) {
-    console.log('foi');
     proxDiv.scrollIntoView({behavior: 'smooth'});
   } else {
-    let irResul = document.querySelector(".caixa-resultado");
-    irResul.scrollIntoView({behavior: 'smooth'});
-    resultado ();
+    setTimeout (chamarResultado, 2000);
   }
 }
 
@@ -141,7 +159,7 @@ function scroll () {
     }
   } 
   contar++;
-  setTimeout (scroll, 2000)
+  setTimeout (scroll, 2000);
 }
 
   function marcarResposta (seletor) {
@@ -162,20 +180,17 @@ function scroll () {
     verificar (seletor.parentNode);
   }
   
-
 //Exibir quiz escolhido pelo usuário
 function renderizarQuizEscolhido () {
   let select = document.querySelector('.select');
-  let id = select.id;
+  id = select.id; //${id}
   let quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
-
-let aleatorio = [];
 function renderizarQuiz (quiz) {
-  lvl.push(quiz.data.levels);
-  console.log(lvl);
+  window.scrollTo(0, 0);
+  lvl.push(quiz);
   let banner = document.querySelector('.banner');
   banner.innerHTML = '';
   banner.innerHTML += `<img src="${quiz.data.image}"/>
@@ -260,12 +275,8 @@ function renderizarQuiz (quiz) {
         aleatorio = [];
     }  
   }
-  let resultado = document.querySelector('.caixa-resultado');
-  resultado.innerHTML = '';
   total = `${quiz.data.levels.length}`;
-  console.log(total);
   qtdeTotalDeRespostas = `${quiz.data.questions.length}`;
-  console.log(qtdeTotalDeRespostas);
 }
 
 
