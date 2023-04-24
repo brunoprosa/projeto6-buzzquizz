@@ -54,6 +54,7 @@ function yourQuizzes(){
 }
 
 yourQuizzes();
+
 /*---------------------------Meus Quizzes-----------------------------*/
 /*---------------------------Other Quizzes----------------------------*/
 function getQuizzes(){

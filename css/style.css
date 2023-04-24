@@ -404,6 +404,7 @@ input{
     margin: 14px;
     width: 100%;
     height: 46px;
+    color: #D1D1D1;
     border: 1px solid #D1D1D1;
     border-radius: 5px;
 }
@@ -459,6 +460,7 @@ input{
         height: 100%;
     
         margin-top: 35px;
+        margin-right: 15px;
     }
 }
 
