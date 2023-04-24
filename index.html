@@ -39,25 +39,16 @@
     </div>
     <div class="screen escondido" id="screen2">
       <!-- HTML for Screen 2 -->
-      <div class="banner"></div>
+      <div class="banner" data-test="banner"></div>
       <div class="quiz"></div>
 
       <div class="caixa-resultado escondido">
-        <div class="titulo-resultado"><p></p></div>
-        <div class="resultado">
-          <img src=""/>
-          <p></p>
-        </div>
       </div>
 
-    <div> 
-      <button onclick="showScreen1()">screen 1</button>
-      <button onclick="showScreen3()">screen 3</button>
-    </div> 
 
     <div>
-      <button class="reinicia" onclick="reinicia()">Reiniciar Quizz</button>
-      <div class="home" onclick="showScreen1()"><p>Voltar Home</p></div>
+      <button class="reinicia" onclick="reinicia()" data-test="restart">Reiniciar Quizz</button>
+      <div class="home" onclick="showScreen1()" data-test="go-home"><p>Voltar Home</p></div>
     </div>
     </div>
     <!-- HTML for Screen 2 -->
