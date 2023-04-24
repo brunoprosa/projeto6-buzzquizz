@@ -111,7 +111,7 @@ function reinicia () {
   qtdeTotalDeRespostas = 0;
   total = 0;
   qtdeNivel = [];
-
+  mostrarResultado.classList.add('escondido');
   naoSelecionado = [];
   lvl = [];
 
@@ -126,23 +126,22 @@ function resultado (lvl) {
   mostrarResultado.scrollIntoView({behavior: 'smooth'});
   mostrarResultado.classList.remove('escondido');
   mostrarResultado.innerHTML = '';
-
     for (let i = 0; i < total; i++) {
       if (lvl.data.levels[i].minValue === valorArredondado) {
         mostrarResultado.innerHTML += `
-        <div class="titulo-resultado"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
+        <div class="titulo-resultado" data-test="level-title"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
         <div class="resultado">
-          <img src="${lvl.data.levels[i].image}"/>
-          <p>${lvl.data.levels[i].text}</p>
+          <img src="${lvl.data.levels[i].image}" data-test="level-img"/>
+          <p data-test="level-text">${lvl.data.levels[i].text}</p>
         </div>
         `
         
       } else if (lvl.data.levels[i].minValue <= valorArredondado && lvl.data.levels[i + 1].minValue > valorArredondado) {
         mostrarResultado.innerHTML += `
-        <div class="titulo-resultado"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
+        <div class="titulo-resultado" data-test="level-title"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
         <div class="resultado">
-          <img src="${lvl.data.levels[i].image}"/>
-          <p>${lvl.data.levels[i].text}</p>
+          <img src="${lvl.data.levels[i].image}" data-test="level-img"/>
+          <p data-test="level-text">${lvl.data.levels[i].text}</p>
         </div>
         `
       } 
@@ -229,15 +228,15 @@ function renderizarQuiz (quiz) {
         return 0.5 - Math.random();
       })
       rendQuiz.innerHTML += `
-        <div class="quest-quizz">
-        <div class="quest" "style="background-color: ${quiz.data.questions[i].color}"><p>${quiz.data.questions[i].title}</p></div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
+        <div class="quest-quizz" data-test="question">
+        <div class="quest" "style="background-color: ${quiz.data.questions[i].color}" data-test="question-title"><p>${quiz.data.questions[i].title}</p></div>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
           </div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[1]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
           </div>
         </div>`
         aleatorio = [];
@@ -251,19 +250,19 @@ function renderizarQuiz (quiz) {
         return 0.5 - Math.random();
       })
       rendQuiz.innerHTML += `
-        <div class="quest-quizz">
-        <div class="quest" "style="background-color: ${quiz.data.questions[i].color}"><p>${quiz.data.questions[i].title}</p></div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
+        <div class="quest-quizz" data-test="question">
+        <div class="quest" "style="background-color: ${quiz.data.questions[i].color}" data-test="question-title"><p>${quiz.data.questions[i].title}</p></div>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
           </div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[1]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
           </div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)">
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[2]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[2]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[2]].text}</p>
           </div>
         </div>`
         aleatorio = [];
@@ -275,23 +274,23 @@ function renderizarQuiz (quiz) {
         return 0.5 - Math.random();
       })
       rendQuiz.innerHTML += `
-        <div class="quest-quizz">
-        <div class="quest" style="background-color: ${quiz.data.questions[i].color}"><p>${quiz.data.questions[i].title}</p></div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)">
+        <div class="quest-quizz" data-test="question">
+        <div class="quest" style="background-color: ${quiz.data.questions[i].color}" data-test="question-title"><p>${quiz.data.questions[i].title}</p></div>
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[0]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[0]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[0]].text}</p>
           </div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)">
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[1]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[1]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[1]].text}</p>
           </div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)">
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[2]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[2]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[2]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[2]].text}</p>
           </div>
-          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[3]].isCorrectAnswer}" onclick="marcarResposta (this)">
+          <div class="opcao ${quiz.data.questions[i].answers[aleatorio[3]].isCorrectAnswer}" onclick="marcarResposta (this)" data-test="answer">
             <img src="${quiz.data.questions[i].answers[aleatorio[3]].image}"/>
-            <p>${quiz.data.questions[i].answers[aleatorio[3]].text}</p>
+            <p data-test="answer-text">${quiz.data.questions[i].answers[aleatorio[3]].text}</p>
           </div>
         </div>`
         aleatorio = [];
