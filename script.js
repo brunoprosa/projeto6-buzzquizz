@@ -5,14 +5,10 @@ let questions = [];
 let answers = [];
 let levels = [];
 let valorId = [];
-const ids = [];
 let quiz;
 let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveis');
 let screen34 = document.querySelector('#screen34');
-
-let semQuiz = document.querySelector('.seus-quizzes-vazio');
-let comQuiz = document.querySelector('.seus-quizzes');
 
 let contarSelecionado = 0;
 
@@ -37,9 +33,10 @@ function showScreen1() {
     document.querySelector('#screen2').classList.add('escondido');
     document.querySelector('#screen3').classList.add('escondido');
     document.querySelector('#screen34').classList.add('escondido');
-    yourQuizzes();
   }
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
+<<<<<<< HEAD
+=======
 /*---------------------------Meus Quizzes-----------------------------*/
 function yourQuizzes(){
   const pegarQuiz = localStorage.getItem("idsLocais");
@@ -84,6 +81,7 @@ yourQuizzes();
 
 /*---------------------------Meus Quizzes-----------------------------*/
 /*---------------------------Other Quizzes----------------------------*/
+>>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -120,7 +118,7 @@ function renderQuizzes(){
     `; 
   }
 }
-/*---------------------------Other Quizzes----------------------------*/
+
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/  
 /*---------------------------------------------- screen 2 ----------------------------------------------------*/  
 function showScreen2(select) {
@@ -155,27 +153,32 @@ function resultado (lvl) {
   mostrarResultado.classList.remove('escondido');
   mostrarResultado.scrollIntoView({behavior: 'smooth'});
   mostrarResultado.innerHTML = '';
+  console.log(total);
+  console.log(qtdeNivel);
+  let contadorNivel = 0;
     for (let i = 0; i < total; i++) {
-      if (lvl.data.levels[i].minValue === valorArredondado) {
+      if (qtdeNivel[i].minValue <= valorArredondado && contadorNivel === 0) {
         mostrarResultado.innerHTML += `
-        <div class="titulo-resultado" data-test="level-title"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
+        <div class="titulo-resultado" data-test="level-title"><p>${valorArredondado}% de acerto: ${qtdeNivel[i].title}</p></div>
         <div class="resultado">
-          <img src="${lvl.data.levels[i].image}" data-test="level-img"/>
-          <p data-test="level-text">${lvl.data.levels[i].text}</p>
+          <img src="${qtdeNivel[i].image}" data-test="level-img"/>
+          <p data-test="level-text">${qtdeNivel[i].text}</p>
         </div>
         `
+        contadorNivel++;
         
-      } else if (lvl.data.levels[i].minValue <= valorArredondado && lvl.data.levels[i + 1].minValue > valorArredondado) {
-        mostrarResultado.innerHTML += `
-        <div class="titulo-resultado" data-test="level-title"><p>${valorArredondado}% de acerto: ${lvl.data.levels[i].title}</p></div>
-        <div class="resultado">
-          <img src="${lvl.data.levels[i].image}" data-test="level-img"/>
-          <p data-test="level-text">${lvl.data.levels[i].text}</p>
-        </div>
-        `
       } 
     }
- 
+    if (contadorNivel === 0) {
+      mostrarResultado.innerHTML += `
+      <div class="titulo-resultado" data-test="level-title"><p>${valorArredondado}% de acerto: ${qtdeNivel[total - 1].title}</p></div>
+      <div class="resultado">
+        <img src="${qtdeNivel[total - 1].image}" data-test="level-img"/>
+        <p data-test="level-text">${qtdeNivel[total - 1].text}</p>
+      </div>
+      `
+      contadorNivel++;
+    } 
   
 }
 
@@ -238,7 +241,14 @@ function renderizarQuizEscolhido () {
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
+
 function renderizarQuiz (quiz) {
+  qtdeNivel = quiz.data.levels;
+  qtdeNivel.sort(function (x, y) {
+    return y.minValue - x.minValue;
+  });
+  console.log(quiz);
+  console.log(qtdeNivel);
   window.scrollTo(0, 0);
   lvl.push(quiz);
   let banner = document.querySelector('.banner');
@@ -511,6 +521,8 @@ function erroDeEnvio(erro){
   console.log(erro);
 }
 
+<<<<<<< HEAD
+=======
 function acessarQuizDiretamete(){
   const pegarQuiz = localStorage.getItem("idsLocais");
   const pegarQuizOK = JSON.parse(pegarQuiz);
@@ -520,6 +532,7 @@ function acessarQuizDiretamete(){
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
+>>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
