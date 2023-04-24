@@ -112,7 +112,8 @@ function reinicia () {
   qtdeTotalDeRespostas = 0;
   total = 0;
   qtdeNivel = [];
-  mostrarResultado.classList.add('escondido');
+  let esconderResultado = document.querySelector('.caixa-resultado');
+  esconderResultado.classList.add('escondido');
   naoSelecionado = [];
   lvl = [];
 
@@ -124,8 +125,8 @@ function resultado (lvl) {
   let qtdeAcerto = (acertos / qtdeRespostas)*100;
   let valorArredondado = Math.round(qtdeAcerto);
   let mostrarResultado = document.querySelector('.caixa-resultado');
-  mostrarResultado.scrollIntoView({behavior: 'smooth'});
   mostrarResultado.classList.remove('escondido');
+  mostrarResultado.scrollIntoView({behavior: 'smooth'});
   mostrarResultado.innerHTML = '';
     for (let i = 0; i < total; i++) {
       if (lvl.data.levels[i].minValue === valorArredondado) {
