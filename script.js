@@ -35,6 +35,26 @@ function showScreen1() {
     document.querySelector('#screen34').classList.add('escondido');
   }
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
+<<<<<<< HEAD
+=======
+/*---------------------------Meus Quizzes-----------------------------*/
+function yourQuizzes(){
+  if (ids.length === 0){
+    semQuiz.classList.remove('.escondido');
+    comQuiz.classList.add('escondido');
+    console.log('não tem quizz');
+  }else{
+    semQuiz.classList.add('.escondido');
+    comQuiz.classList.remove('escondido');
+    console.log('tem quizz');
+  }
+}
+
+yourQuizzes();
+
+/*---------------------------Meus Quizzes-----------------------------*/
+/*---------------------------Other Quizzes----------------------------*/
+>>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -90,7 +110,8 @@ function reinicia () {
   qtdeTotalDeRespostas = 0;
   total = 0;
   qtdeNivel = [];
-  mostrarResultado.classList.add('escondido');
+  let esconderResultado = document.querySelector('.caixa-resultado');
+  esconderResultado.classList.add('escondido');
   naoSelecionado = [];
   lvl = [];
 
@@ -102,8 +123,8 @@ function resultado (lvl) {
   let qtdeAcerto = (acertos / qtdeRespostas)*100;
   let valorArredondado = Math.round(qtdeAcerto);
   let mostrarResultado = document.querySelector('.caixa-resultado');
-  mostrarResultado.scrollIntoView({behavior: 'smooth'});
   mostrarResultado.classList.remove('escondido');
+  mostrarResultado.scrollIntoView({behavior: 'smooth'});
   mostrarResultado.innerHTML = '';
   console.log(total);
   console.log(qtdeNivel);
@@ -189,7 +210,7 @@ function scroll () {
 function renderizarQuizEscolhido () {
   let select = document.querySelector('.select');
   id = select.id; //${id}
-  let quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/55`);
+  let quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
@@ -322,26 +343,26 @@ function informacaoBasica(){
   screen32.innerHTML = ''
   for(i = 1; i <= qntdperguntas; i++){
     screen32.innerHTML += `
-    <div class="previa-pergunta${i} container-input">
+    <div data-test="question-ctn" class="previa-pergunta${i} container-input">
       <h1>Pergunta ${i}</h1>
-      <ion-icon class="expandir" name="create-outline" onclick="expandir('pergunta${i}')"></ion-icon>
+      <ion-icon data-test="toggle" class="expandir" name="create-outline" onclick="expandir('pergunta${i}')"></ion-icon>
     </div>
-    <div class="criar-pergunta${i} container-input escondido">
+    <div data-test="question-ctn" class="criar-pergunta${i} container-input escondido">
       <h1>Pergunta ${i}</h1>
-      <input type="text" id="textPergunta${i}" placeholder="Texto da pergunta">
-      <input type="text" id="colorPergunta${i}" placeholder="Cor de fundo da pergunta">
+      <input type="text" data-test="question-input" id="textPergunta${i}" placeholder="Texto da pergunta">
+      <input type="text" data-test="question-color-input" id="colorPergunta${i}" placeholder="Cor de fundo da pergunta">
       <h1>Resposta correta</h1>
-      <input type="text" id="Cresposta${i}1" placeholder="Resposta correta">
-      <input type="text" id="imgResposta${i}1" placeholder="URL da imagem">
+      <input type="text" data-test="correct-answer-input" id="Cresposta${i}1" placeholder="Resposta correta">
+      <input type="text" data-test="correct-img-input" id="imgResposta${i}1" placeholder="URL da imagem">
       <h1>Respostas incorretas</h1>
-      <input type="text" id="Cresposta${i}2" placeholder="Resposta incorreta 1">
-      <input type="text" class="margin32" id="imgResposta${i}2" placeholder="URL da imagem 1">
+      <input type="text" data-test="wrong-answer-input" id="Cresposta${i}2" placeholder="Resposta incorreta 1">
+      <input type="text" data-test="wrong-img-input" class="margin32" id="imgResposta${i}2" placeholder="URL da imagem 1">
 
-      <input type="text" id="Cresposta${i}3" placeholder="Resposta incorreta 2">
-      <input type="text" class="margin32" id="imgResposta${i}3" placeholder="URL da imagem 2">
+      <input type="text" data-test="wrong-answer-input" id="Cresposta${i}3" placeholder="Resposta incorreta 2">
+      <input type="text" data-test="wrong-img-input" class="margin32" id="imgResposta${i}3" placeholder="URL da imagem 2">
 
-      <input type="text" id="Cresposta${i}4" placeholder="Resposta incorreta 3">
-      <input type="text" id="imgResposta${i}4" placeholder="URL da imagem 3">
+      <input type="text" data-test="wrong-answer-input" id="Cresposta${i}4" placeholder="Resposta incorreta 3">
+      <input type="text" data-test="wrong-img-input" id="imgResposta${i}4" placeholder="URL da imagem 3">
     </div>
     `;
   }
@@ -386,16 +407,16 @@ function criarPerguntas(){
   screen33.innerHTML = '';
   for(i = 1; i <= informacaoBasic.quantNiveis; i++){
     screen33.innerHTML += `
-    <div class="previa-nivel${i} container-input">
+    <div data-test="level-ctn" class="previa-nivel${i} container-input">
       <h1>Nível ${i}</h1>
-      <ion-icon class="expandir" name="create-outline" onclick="expandir('nivel${i}')"></ion-icon>
+      <ion-icon data-test="toggle" class="expandir" name="create-outline" onclick="expandir('nivel${i}')"></ion-icon>
     </div>
-    <div class="criar-nivel${i} container-input escondido">
+    <div data-test="level-ctn" class="criar-nivel${i} container-input escondido">
       <h1>Nível ${i}</h1>
-      <input type="text" id="tituloDoNivel${i}" placeholder="Título do nível">
-      <input type="text" id="notaMinima${i}" placeholder="% de acerto mínima">
-      <input type="text" id="imgNivel${i}" placeholder="URL da imagem do nível">
-      <input type="text" id="textNivel${i}" placeholder="Descrição do nível">
+      <input data-test="level-input" type="text" id="tituloDoNivel${i}" placeholder="Título do nível">
+      <input data-test="level-percent-input" type="text" id="notaMinima${i}" placeholder="% de acerto mínima">
+      <input data-test="level-img-input" type="text" id="imgNivel${i}" placeholder="URL da imagem do nível">
+      <input data-test="level-description-input" type="text" id="textNivel${i}" placeholder="Descrição do nível">
     </div>
     `;
   }
@@ -444,7 +465,23 @@ function criarNiveis(){
   
 }
 
-function finalizarCriarQuizz(){
+function finalizarCriarQuizz(resposta){
+  document.querySelector('.fimDaCriacao').innerHTML += `
+  
+  <li data-test="success-banner" id ="${resposta.id}" class ="quizz" style="
+    background:linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url(${resposta.image});
+    background-size:cover;"
+    onclick="showScreen2(this)">
+    <h1 class="quizz-title" >${resposta.title}</h1>
+  </li>        
+`; 
+
+  const id = {id: resposta.id};
+  ids.push(id);
+  console.log(ids);
+  const idsString = JSON.stringify(ids);
+  localStorage.setItem("idsLocais",idsString);
+
   questions = [];
   levels = [];
 
@@ -455,6 +492,18 @@ function erroDeEnvio(erro){
   console.log(erro);
 }
 
+<<<<<<< HEAD
+=======
+function acessarQuizDiretamete(){
+  const pegarQuiz = localStorage.getItem("idsLocais");
+  pegarQuiz = JSON.parse(pegarQuiz);
+  console.log(pegarQuiz)
+  const id = pegarQuiz[pegarQuiz.length];
+  const quizzEscolhido = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${id}`);
+  quizzEscolhido.then(renderizarQuiz);
+  quizzEscolhido.catch(erroRenderizarQuiz);
+}
+>>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
