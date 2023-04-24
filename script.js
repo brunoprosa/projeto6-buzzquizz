@@ -417,7 +417,7 @@ function criarPerguntas(){
 function criarNiveis(){
   let niveis = {};
   let zero = 0;
-  for(i = 1; i <= informacaoBasic.quantniveis; i++){
+  for(i = 1; i <= informacaoBasic.quantNiveis; i++){
     niveis = {
       title: document.querySelector(`#tituloDoNivel${i}`).value,
       image: document.querySelector(`#imgNivel${i}`).value,
@@ -434,7 +434,7 @@ function criarNiveis(){
       levels = [];
       return;
     }
-
+    console.log(niveis);
     levels.push(niveis);
   }
   
@@ -447,14 +447,18 @@ function criarNiveis(){
 
   console.log(quizz);
 
-  questions = [];
-  levels = [];
-
   const promise = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes', quizz);
-  promise.then(showScreen34);
+  promise.then(finalizarCriarQuizz);
   promise.catch(erroDeEnvio);
 
 
+}
+
+function finalizarCriarQuizz(){
+  questions = [];
+  levels = [];
+
+  showScreen34();
 }
 
 function erroDeEnvio(erro){
