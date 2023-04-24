@@ -491,14 +491,6 @@ function acessarQuizDiretamete(){
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
-
-function storingQuiz(){
-  const quizzCriado = ids;  // Array que você quer salvar
-  const quizzCriadoSerializado = JSON.stringify(quizzCriado); // Array convertida pra uma string
-  localStorage.setItem("quiz", quizzCriadoSerializado); // Armazenando a string na chave "quiz" do Local Storage
-  const quizSerializada = localStorage.getItem("quiz"); // Pegando de volta a string armazenada na chave "quiz"
-  const myquiz = JSON.parse(quizSerializada); // Transformando a string de volta na array original
-}
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
