@@ -3,6 +3,7 @@ axios.defaults.headers.common['Authorization'] = 'QvrjsZKGJ1H8evjKA56QR65s';
 let informacaoBasic = {};
 let questions = [];
 let answers = [];
+let levels = [];
 let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveiss');
 let screen34 = document.querySelector('#screen34');
@@ -189,7 +190,7 @@ function informacaoBasica(){
   const qntdniveis = Number(document.querySelector('#qntdNiveis').value);
   informacaoBasic = {
     title: titulo,
-    url: url,
+    image: url,
     quantPerguntas: qntdperguntas,
     quantNiveis: qntdniveis
   };
@@ -206,17 +207,17 @@ function informacaoBasica(){
       <input type="text" id="textPergunta${i}" placeholder="Texto da pergunta">
       <input type="text" id="colorPergunta${i}" placeholder="Cor de fundo da pergunta">
       <h1>Resposta correta</h1>
-      <input type="text" id="respostaCerta${i}" placeholder="Resposta correta">
-      <input type="text" id="imgCerta${i}" placeholder="URL da imagem">
+      <input type="text" id="Cresposta${i}1" placeholder="Resposta correta">
+      <input type="text" id="imgResposta${i}1" placeholder="URL da imagem">
       <h1>Respostas incorretas</h1>
-      <input type="text" id="respostaErrada${i}1" placeholder="Resposta incorreta 1">
-      <input type="text" class="margin32" id="imgErrada${i}1" placeholder="URL da imagem 1">
+      <input type="text" id="Cresposta${i}2" placeholder="Resposta incorreta 1">
+      <input type="text" class="margin32" id="imgResposta${i}2" placeholder="URL da imagem 1">
 
-      <input type="text" id="respostaErrada${i}2" placeholder="Resposta incorreta 2">
-      <input type="text" class="margin32" id="imgErrada${i}2" placeholder="URL da imagem 2">
+      <input type="text" id="Cresposta${i}3" placeholder="Resposta incorreta 2">
+      <input type="text" class="margin32" id="imgResposta${i}3" placeholder="URL da imagem 2">
 
-      <input type="text" id="respostaErrada${i}3" placeholder="Resposta incorreta 3">
-      <input type="text" id="imgErrada${i}3" placeholder="URL da imagem 3">
+      <input type="text" id="Cresposta${i}4" placeholder="Resposta incorreta 3">
+      <input type="text" id="imgResposta${i}4" placeholder="URL da imagem 3">
     </div>
     `;
   }
@@ -224,7 +225,28 @@ function informacaoBasica(){
 }
 
 function criarPerguntas(){
-
+  let pergunta = {};
+  let resposta = {};
+  for(i = 1; i <= informacaoBasic.quantPerguntas; i++){
+    for(j = 1; j < 5; j++){
+      if(document.querySelector(`#Cresposta${i}${j}`).value !== none || document.querySelector(`#imgResposta${i}${j}`).value !== none){
+        resposta = {
+          text: document.querySelector(`#Cresposta${i}${j}`).value,
+          image: document.querySelector(`#imgResposta${i}${j}`).value,
+          isCorrectAnswer: j === 1
+        };
+        answers.push(resposta);
+      }
+    }
+    pergunta = {
+      title: document.querySelector(`#textPergunta${i}`).value,
+      color: document.querySelector(`#colorPergunta${i}`).value,
+      answers: answers
+    }
+    questions.push(pergunta);
+    console.log(questions);
+    answers = [];
+  }
 
   screen33.innerHTML = '';
   for(i = 1; i <= informacaoBasic.qntdniveis; i++){
@@ -242,7 +264,39 @@ function criarPerguntas(){
     </div>
     `;
   }
+
   showScreen33();
+
+}
+
+function criarNiveis(){
+  let niveis = {};
+  for(i = 1; i <= informacaoBasic.qntdniveis; i++){
+    niveis = {
+      title: document.querySelector(`#tituloDoNivel${i}`).value,
+      image: document.querySelector(`#imgNivel${i}`).value,
+      text: document.querySelector(`#textNivel${i}`).value,
+      minValue: Number(document.querySelector(`#notaMinima${i}`).value)
+    };
+    levels.push(niveis);
+  }
+  const quizz = {
+    title: informacaoBasic.title,
+    image: informacaoBasic.image,
+    questions: questions,
+    levels: levels
+  }
+
+  console.log(quizz);
+
+  questions = [];
+  levels = [];
+
+  const promise = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes', quizz);
+  promise.then(showScreen34);
+  promise.catch(erroDeEnvio);
+
+
 }
 
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
