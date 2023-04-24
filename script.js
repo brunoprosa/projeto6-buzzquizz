@@ -5,10 +5,14 @@ let questions = [];
 let answers = [];
 let levels = [];
 let valorId = [];
+const ids = [];
 let quiz;
 let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveis');
 let screen34 = document.querySelector('#screen34');
+
+let semQuiz = document.querySelector('.seus-quizzes-vazio');
+let comQuiz = document.querySelector('.seus-quizzes');
 
 let contarSelecionado = 0;
 
@@ -33,8 +37,25 @@ function showScreen1() {
     document.querySelector('#screen2').classList.add('escondido');
     document.querySelector('#screen3').classList.add('escondido');
     document.querySelector('#screen34').classList.add('escondido');
+    yourQuizzes();
   }
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
+/*---------------------------Meus Quizzes-----------------------------*/
+function yourQuizzes(){
+  if (ids.length === 0){
+    semQuiz.classList.remove('.escondido');
+    comQuiz.classList.add('escondido');
+    console.log('não tem quizz');
+  }else{
+    semQuiz.classList.add('.escondido');
+    comQuiz.classList.remove('escondido');
+    console.log('tem quizz');
+  }
+}
+
+yourQuizzes();
+/*---------------------------Meus Quizzes-----------------------------*/
+/*---------------------------Other Quizzes----------------------------*/
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -71,7 +92,7 @@ function renderQuizzes(){
     `; 
   }
 }
-
+/*---------------------------Other Quizzes----------------------------*/
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/  
 /*---------------------------------------------- screen 2 ----------------------------------------------------*/  
 function showScreen2(select) {
@@ -429,7 +450,7 @@ function criarNiveis(){
   promise.then(finalizarCriarQuizz);
   promise.catch(erroDeEnvio);
 
-  
+
 }
 
 function finalizarCriarQuizz(){
@@ -443,6 +464,13 @@ function erroDeEnvio(erro){
   console.log(erro);
 }
 
+function storingQuiz(){
+  const quizzCriado = ids;  // Array que você quer salvar
+  const quizzCriadoSerializado = JSON.stringify(quizzCriado); // Array convertida pra uma string
+  localStorage.setItem("quiz", quizzCriadoSerializado); // Armazenando a string na chave "quiz" do Local Storage
+  const quizSerializada = localStorage.getItem("quiz"); // Pegando de volta a string armazenada na chave "quiz"
+  const myquiz = JSON.parse(quizSerializada); // Transformando a string de volta na array original
+}
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
@@ -450,6 +478,7 @@ function showScreen3() {
     document.querySelector('#screen2').classList.add('escondido');
     document.querySelector('#screen3').classList.remove('escondido');
     document.querySelector('#screen31').classList.remove('escondido');
+    informacaoBasica();
   }
 
   function showScreen32(){
