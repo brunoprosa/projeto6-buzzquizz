@@ -15,62 +15,175 @@
     <div class="header">BuzzQuizz</div>
     <div class="screen" id="screen1">
       <!-- HTML for Screen 1 -->
-      
+
       <div class="body1">
-        <div class="seus-quizzes">
-          <p class="ainda-nao-criou">Você não criou nenhum<br>quizz ainda :(</p>
-          <button class="create-quizz" onclick="showScreen3()">Criar Quizz</button>
+        <div class="container-seus-quizzes">
+          <div class="seus-quizzes-vazio">
+            <div class="div250">
+              <div class="ainda-nao-criou">Você não criou nenhum<br>quizz ainda :(</div>
+              <button class="create-quizz" onclick="showScreen3()">Criar Quizz</button>
+            </div>
+          </div>
+          <div class="seus-quizzes escondido">
+            <div class="head-seus-quizzes">
+              <p>Seus Quizzes</p>
+              <ion-icon onclick="showScreen3()" class="new-quizz" name="add-circle"></ion-icon>
+            </div>
+          </div>
         </div>
         <div class="todos-os-quizzees">
           <div class="head-quizz">Todos os Quizzes</div>
-          <div onclick="showScreen2()" class="quizz quizz-top">
-            <p class="quizz-title">Title</p>
+          <ul class="others-quiz"></ul>
+        <!--<div onclick="showScreen2()" class="quizz quizz-top">
+            <img class="quizz1" src="./img/nba.png"/>
+            <label class="quizz-title">O quanto você sabe de NBA?</label>
           </div>
-          <div onclick="showScreen2()" class="quizz quizz-top">
-            <p class="quizz-title">Title</p>
+          <div onclick="showScreen2()" class="quizz quizz2 quizz-top">
+            <div class="quizz-title">Só quem é viciado em Breaking Bad vai acertar todas as perguntas!</div>
           </div>
-          <div onclick="showScreen2()" class="quizz quizz-top">
-            <p class="quizz-title">Title</p>
+          <div onclick="showScreen2()" class="quizz quizz3 quizz-top">
+            <div class="quizz-title">Você sabe tudo sobre Naruto?</div>
           </div>
-          <div onclick="showScreen2()" class="quizz quizz-bot">
-            <p class="quizz-title">Title</p>
+          <div onclick="showScreen2()" class="quizz quizz4 quizz-bot">
+            <div class="quizz-title">Title</div>
           </div>
-          <div onclick="showScreen2()" class="quizz quizz-bot">
-            <p class="quizz-title">Title</p>
+          <div onclick="showScreen2()" class="quizz quizz5 quizz-bot">
+            <div class="quizz-title">Title</div>
           </div>
-          <div onclick="showScreen2()" class="quizz quizz-bot">
-            <p class="quizz-title">Title</p>
-          </div>
+          <div onclick="showScreen2()" class="quizz quizz6 quizz-bot">
+            <div class="quizz-title">Title</div>
+          </div> -->
         </div>
-        <!-- <h1>Screen 1</h1>
-        <button </button>-->
       </div>
     </div>
     <div class="screen escondido" id="screen2">
       <!-- HTML for Screen 2 -->
-      <h1>Screen 2</h1>
-      <button onclick="showScreen1()">screen 1</button>
-      <button onclick="showScreen3()">screen 3</button>
-    </div> 
+      <div class="banner"></div>
+      <div class="quiz"></div>
+
+      <div class="caixa-resultado escondido">
+        <div class="titulo-resultado"><p></p></div>
+        <div class="resultado">
+          <img src=""/>
+          <p></p>
+        </div>
+      </div>
+
+    <div> 
+    <div>
+      <button class="reinicia" onclick="reinicia()">Reiniciar Quizz</button>
+      <div class="home" onclick="showScreen1()"><p>Voltar Home</p></div>
+    </div>
+    <!-- HTML for Screen 2 -->
     <div class="screen escondido" id="screen3">
-      <!-- HTML for Screen 3 -->
-      <h1>Screen 3</h1>
-      <button onclick="showScreen1()">screen 1</button>
-      <button onclick="showScreen2()">screen 2</button>
-      <div class="screen" id="screen31">
+      <div class="screen centralizar" id="screen31">
         <!--info basica do quiz-->
-        <button onclick="showScreen32()">screen 3.2</button>
+        <h1 class="titulo-da-pagina">Comece pelo começo</h1>
+        <div class="container-input">
+        <input type=text id="titulo" placeholder="Título do seu quizz">
+        <input type=text id="url" placeholder="URL da imagem do seu quizz">
+        <input type=text id="qntdPerguntas" placeholder="Quantidade de perguntas do quizz">
+        <input type=text id="qntdNiveis" placeholder="Quantidade de níveis do quizz">
       </div>
-      <div class="screen escondido" id="screen32">
-        <button onclick="showScreen33()">screen 3.3</button>
+        <button class="criar-pergunta" onclick="informacaoBasica()">Prosseguir pra criar perguntas</button>
       </div>
-      <div class="screen escondido" id="screen33">
-        <button onclick="showScreen34()">screen 3.4</button>
+      <div class="screen centralizar escondido" id="screen32">
+        <!--criar as perguntas do quiz-->
+          <h1 class="titulo-da-pagina">Crie suas perguntas</h1>
+          <div class="container-criar-pergunta">
+            <div class="criar-pergunta1 container-input">
+              <h1>Pergunta 1</h1>
+              <input type="text" id="textPergunta1" placeholder="Texto da pergunta">
+              <input type="text" id="colorPergunta1" placeholder="Cor de fundo da pergunta">
+              <h1>Resposta correta</h1>
+              <input type="text" id="respostaCerta1" placeholder="Resposta correta">
+              <input type="text" id="imgCerta1" placeholder="URL da imagem">
+              <h1>Respostas incorretas</h1>
+              <input type="text" id="respostaErrada11" placeholder="Resposta incorreta 1">
+              <input type="text" class="margin32" id="imgErrada11" placeholder="URL da imagem 1">
+
+              <input type="text" id="respostaErrada12" placeholder="Resposta incorreta 2">
+              <input type="text" class="margin32" id="imgErrada12" placeholder="URL da imagem 2">
+
+              <input type="text" id="respostaErrada13" placeholder="Resposta incorreta 3">
+              <input type="text" id="imgErrada13" placeholder="URL da imagem 3">
+            </div>
+            <div class="previa-pergunta2 container-input">
+              <h1>Pergunta 2</h1>
+              <ion-icon class="expandir" name="create-outline" onclick="expandir('pergunta2')"></ion-icon>
+            </div>
+            <div class="criar-pergunta2 container-input escondido">
+              <h1>Pergunta 2</h1>
+              <input type="text" id="textPergunta2" placeholder="Texto da pergunta">
+              <input type="text" id="colorPergunta2" placeholder="Cor de fundo da pergunta">
+              <h1>Resposta correta</h1>
+              <input type="text" id="respostaCerta2" placeholder="Resposta correta">
+              <input type="text" id="imgCerta2" placeholder="URL da imagem">
+              <h1>Respostas incorretas</h1>
+              <input type="text" id="respostaErrada21" placeholder="Resposta incorreta 1">
+              <input type="text" class="margin32" id="imgErrada21" placeholder="URL da imagem 1">
+
+              <input type="text" id="respostaErrada22" placeholder="Resposta incorreta 2">
+              <input type="text" class="margin32" id="imgErrada22" placeholder="URL da imagem 2">
+
+              <input type="text" id="respostaErrada23" placeholder="Resposta incorreta 3">
+              <input type="text" id="imgErrada23" placeholder="URL da imagem 3">
+            </div>
+            <div class="previa-pergunta3 container-input">
+              <h1>Pergunta 3</h1>
+              <ion-icon class="expandir" name="create-outline" onclick="expandir('pergunta3')"></ion-icon>
+            </div>
+            <div class="criar-pergunta3 container-input escondido">
+              <h1>Pergunta 3</h1>
+              <input type="text" id="textPergunta3" placeholder="Texto da pergunta">
+              <input type="text" id="colorPergunta3" placeholder="Cor de fundo da pergunta">
+              <h1>Resposta correta</h1>
+              <input type="text" id="respostaCerta3" placeholder="Resposta correta">
+              <input type="text" id="imgCerta3" placeholder="URL da imagem">
+              <h1>Respostas incorretas</h1>
+              <input type="text" id="respostaErrada31" placeholder="Resposta incorreta 1">
+              <input type="text" class="margin32" id="imgErrada31" placeholder="URL da imagem 1">
+
+              <input type="text" id="respostaErrada32" placeholder="Resposta incorreta 2">
+              <input type="text" class="margin32" id="imgErrada32" placeholder="URL da imagem 2">
+
+              <input type="text" id="respostaErrada33" placeholder="Resposta incorreta 3">
+              <input type="text" id="imgErrada33" placeholder="URL da imagem 3">
+            </div>
+          </div>
+        <button class="criar-nivel" onclick="criarPerguntas()">Prosseguir pra criar níveis</button>
       </div>
-      <div class="screen escondido" id="screen34">
-        <button onclick="showScreen1()">screen 1</button>
+      <div class="screen centralizar  escondido" id="screen33">
+        <h1 class="titulo-da-pagina">Agora, decida os níveis</h1>
+        <div class="container-criar-niveis">
+          <div class="criar-nivel1 container-input">
+            <h1>Nível 1</h1>
+            <input type="text" id="tituloDoNivel1" placeholder="Título do nível">
+            <input type="text" id="notaMinima1" placeholder="% de acerto mínima">
+            <input type="text" id="imgNivel1" placeholder="URL da imagem do nível">
+            <input type="text" id="textNivel1" placeholder="Descrição do nível">
+          </div>
+          <div class="previa-nivel2 container-input">
+            <h1>Nível 2</h1>
+            <ion-icon class="expandir" name="create-outline" onclick="expandir('nivel2')"></ion-icon>
+          </div>
+          <div class="criar-nivel2 container-input escondido">
+            <h1>Nível 2</h1>
+            <input type="text" id="tituloDoNivel2" placeholder="Título do nível">
+            <input type="text" id="notaMinima2" placeholder="% de acerto mínima">
+            <input type="text" id="imgNivel2" placeholder="URL da imagem do nível">
+            <input type="text" id="textNivel2" placeholder="Descrição do nível">
+          </div>
+        </div>
+        <button class="finalizar-quizz" onclick="showScreen34()">Finalizar Quizz</button>
+      </div>
+      <div class="screen centralizar escondido" id="screen34">
+        <h1 class="titulo-da-pagina">Seu quizz está pronto!</h1>
+        <button class="acessar-quiz">Acessar Quizz</button>
+        <button class="cinza" onclick="showScreen1()">Voltar pra home</button>
       </div>
     </div>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
   </body>
