@@ -176,7 +176,9 @@ button{
     height: 409px;
 
     margin-top: 77px;
+}
 
+.others-quiz{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -203,8 +205,12 @@ button{
 
     border-radius: 5px;
 
+    margin-top: 12px;
+
     display: flex;
     justify-content: center;
+
+    position: relative;
 }
 
 .quizz-title{
@@ -222,42 +228,9 @@ button{
     justify-content: center;
 
     color: #FFFFFF;
-}
 
-.quizz-bot{
-    margin-top: 12px;
+    position: absolute;
 }
-
-.quizz1{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/nba.png");
-    background-size: cover;
-}
-
-.quizz2{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/breaking-bad.png");
-    background-size: cover;
-}
-
-.quizz3{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("https://static.quizur.com/i/b/58e7df25bf6916.5963426758e7df25a17155.50133024.jpg");
-    background-size: cover;
-}
-
-.quizz4{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/breaking-bad.png");
-    background-size: cover;
-}
-
-.quizz5{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/nba.png");
-    background-size: cover;
-}
-
-.quizz6{
-    background: linear-gradient(180deg,rgba(255,255,255,0)0%,rgba(0,0,0,0.5)64.58%, #000000 100%), url("/img/breaking-bad.png");
-    background-size: cover;
-}
-
 /*---------------------------TELA 1 --------------------------------*/
 /*---------------------------TELA 2 --------------------------------*/
 .body2 {
@@ -325,6 +298,7 @@ button{
     width: 330px;
     height: 217px;
     margin-top: 20px;
+    cursor: pointer;
 }
 .opcao img {
     width: 100%;
@@ -346,6 +320,78 @@ button{
 .opacidade {
     opacity: 0.3;
 }
+
+.caixa-resultado {
+    width: 759px;
+    height: 430px;
+    background-color: #FFFFFF;
+    margin-bottom: 42px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: space-around;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.titulo-resultado {
+    width: 727px;
+    height: 99px;
+    background-color: #EC362D;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+.titulo-resultado p {
+    font-size: 23px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+.resultado {
+    width: 727px;
+    height: 277px;
+    display: flex;
+    justify-content: space-around;
+    overflow-wrap: break-word;
+}
+.resultado img {
+    width: 364px;
+    height: 273px;
+    margin-right: 21px;
+}
+.resultado p {
+    width: 328px;
+    height: 273px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #484848;
+}
+
+.reinicia {
+    width: 260px;
+    height: 52px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    margin: 50px auto 16px;
+    cursor: pointer;
+}
+.home {
+    width: 219px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 50px;
+    cursor: pointer;
+}
+.home p{
+    font-size: 21px;
+    font-weight: 400;
+    color: #818181;
+}
 /*---------------------------TELA 2 --------------------------------*/
 
 /*---------------------------TELA 3 --------------------------------*/
@@ -358,7 +404,6 @@ input{
     margin: 14px;
     width: 100%;
     height: 46px;
-    color: #D1D1D1;
     border: 1px solid #D1D1D1;
     border-radius: 5px;
 }
@@ -417,6 +462,12 @@ input{
     }
 }
 
+@media (max-width: 759px){
+    .quest-quizz {
+        width: 100%;
+    }
+}
+
 @media (max-width: 1100px){
     .body1{
         padding: 31px 17px 31px 18px;
@@ -441,7 +492,7 @@ input{
 
     .quizz{
         margin-top: 14px;
-    }   
+    }
 }
 
 
