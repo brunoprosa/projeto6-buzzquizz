@@ -60,12 +60,12 @@
 
         <h1 class="titulo-da-pagina">Comece pelo começo</h1>
         <div class="container-input">
-        <input type=text id="titulo" placeholder="Título do seu quizz">
-        <input type=text id="url" placeholder="URL da imagem do seu quizz">
-        <input type=text id="qntdPerguntas" placeholder="Quantidade de perguntas do quizz">
-        <input type=text id="qntdNiveis" placeholder="Quantidade de níveis do quizz">
+        <input type=text id="titulo" data-test="title-input" placeholder="Título do seu quizz">
+        <input type=text id="url" data-test="img-input" placeholder="URL da imagem do seu quizz">
+        <input type=text id="qntdPerguntas" data-test="questions-amount-input" placeholder="Quantidade de perguntas do quizz">
+        <input type=text id="qntdNiveis" data-test="levels-amount-input" placeholder="Quantidade de níveis do quizz">
       </div>
-        <button class="criar-pergunta" onclick="informacaoBasica()">Prosseguir pra criar perguntas</button>
+        <button class="criar-pergunta" data-test="go-create-questions" onclick="informacaoBasica()">Prosseguir pra criar perguntas</button>
       </div>
       <div class="screen centralizar escondido" id="screen32">
         
@@ -133,7 +133,7 @@
               <input type="text" id="imgErrada33" placeholder="URL da imagem 3">
             </div>
           </div>
-        <button class="criar-nivel" onclick="criarPerguntas()">Prosseguir pra criar níveis</button>
+        <button class="criar-nivel" data-test="go-create-levels" onclick="criarPerguntas()">Prosseguir pra criar níveis</button>
         
           <!--criar as niveis do quiz-->
 
@@ -160,15 +160,16 @@
             <input type="text" id="textNivel2" placeholder="Descrição do nível">
           </div>
         </div>
-        <button class="finalizar-quizz" onclick="criarNiveis()">Finalizar Quizz</button>
+        <button class="finalizar-quizz" data-test="finish" onclick="criarNiveis()">Finalizar Quizz</button>
 
         <!--finalizar criação do quiz-->
 
       </div>
       <div class="screen centralizar escondido" id="screen34">
         <h1 class="titulo-da-pagina">Seu quizz está pronto!</h1>
-        <button class="acessar-quiz">Acessar Quizz</button>
-        <button class="cinza" onclick="showScreen1()">Voltar pra home</button>
+        <ul class = "fimDaCriacao"></ul>
+        <button class="acessar-quiz" data-test="go-quiz" onclick="acessarQuizDiretamete()">Acessar Quizz</button>
+        <button class="cinza" data-test="go-home" onclick="showScreen1()">Voltar pra home</button>
       </div>
     </div>
 
