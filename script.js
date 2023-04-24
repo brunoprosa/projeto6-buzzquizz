@@ -10,6 +10,9 @@ let screen32 = document.querySelector('.container-criar-pergunta');
 let screen33 = document.querySelector('.container-criar-niveis');
 let screen34 = document.querySelector('#screen34');
 
+let semQuiz = document.querySelector('.seus-quizzes-vazio');
+let comQuiz = document.querySelector('.seus-quizzes')
+
 let contarSelecionado = 0;
 
 let contar = 0;
@@ -28,15 +31,16 @@ let reiniciarQuiz = [];
 let aleatorio = [];
 let id;
 
+let ids=[];
+
 function showScreen1() {
     document.querySelector('#screen1').classList.remove('escondido');
     document.querySelector('#screen2').classList.add('escondido');
     document.querySelector('#screen3').classList.add('escondido');
     document.querySelector('#screen34').classList.add('escondido');
+    yourQuizzes();
   }
 /*---------------------------------------------- screen 1 ----------------------------------------------------*/
-<<<<<<< HEAD
-=======
 /*---------------------------Meus Quizzes-----------------------------*/
 function yourQuizzes(){
   const pegarQuiz = localStorage.getItem("idsLocais");
@@ -50,7 +54,7 @@ function yourQuizzes(){
   }else{
     semQuiz.classList.add('.escondido');
     comQuiz.classList.remove('escondido');
-    console.log('tem quizz');
+    console.log('tem quizz');-
     MyQuizzes()
   }
 }
@@ -81,7 +85,7 @@ yourQuizzes();
 
 /*---------------------------Meus Quizzes-----------------------------*/
 /*---------------------------Other Quizzes----------------------------*/
->>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
+
 function getQuizzes(){
       const promise = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
       promise.then( getOK );
@@ -521,8 +525,6 @@ function erroDeEnvio(erro){
   console.log(erro);
 }
 
-<<<<<<< HEAD
-=======
 function acessarQuizDiretamete(){
   const pegarQuiz = localStorage.getItem("idsLocais");
   const pegarQuizOK = JSON.parse(pegarQuiz);
@@ -532,7 +534,7 @@ function acessarQuizDiretamete(){
   quizzEscolhido.then(renderizarQuiz);
   quizzEscolhido.catch(erroRenderizarQuiz);
 }
->>>>>>> 595a1779a4f99429075a3660125e2a06f7242528
+
 /*----------------------------------------------screen 3 ------------------------------------------------------*/
 
 function showScreen3() {
